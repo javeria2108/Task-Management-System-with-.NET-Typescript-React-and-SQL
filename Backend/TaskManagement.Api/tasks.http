@@ -1,2 +1,11 @@
-//GET http://localhost:5068/users
+GET http://localhost:5068/users
+###
 GET http://localhost:5068/users/1
+###
+POST http://localhost:5068/users
+Content-Type: application/json
+
+{
+    "Name":"Dummy User 4",
+    "Email":"dummy4@gmail.com"
+}
