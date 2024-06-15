@@ -1,3 +1,3 @@
 ﻿namespace TaskManagement.Api.Dtos;
 
-public record class User(int Id, string Name, string Email);
+public record class UserDto(int Id, string Name, string Email);
