@@ -1,3 +1,6 @@
 ﻿namespace TaskManagement.Api.Dtos;
-
-public record class UpdateUserDto(string Name, string Email);
+using System.ComponentModel.DataAnnotations;
+public record class UpdateUserDto(
+    [Required][StringLength(50)]string Name,
+    [Required][StringLength(100)] string Email
+);

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\Backend\\TaskManagement.Api\\TaskManagement.Api.csproj": {}
+    "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\backend\\TaskManagement.Api\\TaskManagement.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\Backend\\TaskManagement.Api\\TaskManagement.Api.csproj": {
+    "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\backend\\TaskManagement.Api\\TaskManagement.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\Backend\\TaskManagement.Api\\TaskManagement.Api.csproj",
+        "projectUniqueName": "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\backend\\TaskManagement.Api\\TaskManagement.Api.csproj",
         "projectName": "TaskManagement.Api",
-        "projectPath": "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\Backend\\TaskManagement.Api\\TaskManagement.Api.csproj",
+        "projectPath": "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\backend\\TaskManagement.Api\\TaskManagement.Api.csproj",
         "packagesPath": "C:\\Users\\PMLS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\Backend\\TaskManagement.Api\\obj\\",
+        "outputPath": "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\backend\\TaskManagement.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PMLS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -44,6 +44,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "MinimalApis.Extensions": {
+              "target": "Package",
+              "version": "[0.11.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

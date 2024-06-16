@@ -24,3 +24,9 @@ C:\Users\PMLS\Documents\Web-Dev\Task Management App\Backend\TaskManagement.Api\o
 C:\Users\PMLS\Documents\Web-Dev\Task Management App\Backend\TaskManagement.Api\obj\Debug\net8.0\TaskManagement.Api.genruntimeconfig.cache
 C:\Users\PMLS\Documents\Web-Dev\Task Management App\Backend\TaskManagement.Api\obj\Debug\net8.0\ref\TaskManagement.Api.dll
 C:\Users\PMLS\Documents\Web-Dev\Task Management App\backend\TaskManagement.Api\obj\Debug\net8.0\TaskManagement.Api.sourcelink.json
+C:\Users\PMLS\Documents\Web-Dev\Task Management App\backend\TaskManagement.Api\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\PMLS\Documents\Web-Dev\Task Management App\backend\TaskManagement.Api\bin\Debug\net8.0\MinimalApis.Extensions.dll
+C:\Users\PMLS\Documents\Web-Dev\Task Management App\backend\TaskManagement.Api\bin\Debug\net8.0\MiniValidation.dll
+C:\Users\PMLS\Documents\Web-Dev\Task Management App\backend\TaskManagement.Api\obj\Debug\net8.0\TaskManagement.Api.csproj.AssemblyReference.cache
+C:\Users\PMLS\Documents\Web-Dev\Task Management App\backend\TaskManagement.Api\obj\Debug\net8.0\TaskManagement.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\PMLS\Documents\Web-Dev\Task Management App\backend\TaskManagement.Api\obj\Debug\net8.0\TaskMana.88DA88F4.Up2Date

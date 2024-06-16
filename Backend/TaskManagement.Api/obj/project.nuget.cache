@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "T/JFq38QuqI=",
+  "dgSpecHash": "1b3NmbdPpz0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\Backend\\TaskManagement.Api\\TaskManagement.Api.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\backend\\TaskManagement.Api\\TaskManagement.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\PMLS\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\PMLS\\.nuget\\packages\\minimalapis.extensions\\0.11.0\\minimalapis.extensions.0.11.0.nupkg.sha512",
+    "C:\\Users\\PMLS\\.nuget\\packages\\minivalidation\\0.8.0\\minivalidation.0.8.0.nupkg.sha512"
+  ],
   "logs": []
 }
