@@ -50,4 +50,10 @@ app.MapPut("users/{id}", (int id, UpdateUserDto updatedUser) =>
     return Results.NoContent();
 });
 
+//DELETE /users/id
+app.MapDelete("users/{id}",(int id)=>{
+    users.RemoveAll(user=>user.Id==id);
+    return Results.NoContent();
+}
+);
 app.Run();

@@ -18,3 +18,5 @@ Content-Type: application/json
     "Email":"dummy1@gmail.com"
 
 }
+###
+DELETE http://localhost:5068/users/2
