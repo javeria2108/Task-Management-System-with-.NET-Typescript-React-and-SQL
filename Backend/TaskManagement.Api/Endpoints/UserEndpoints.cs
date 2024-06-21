@@ -11,13 +11,6 @@ public static class UsersEndpoints
 
     const string getUserEndpoint = "GetUser";
 
-    private static readonly List<UserDetailsDto> users = [
-        new(
-        1, "Javeria Zaheer", "javeriaz@gmail.com",1
-    )
-
-    ];
-
     public static RouteGroupBuilder MapUsersEndpoints(this WebApplication app)
     {
         var group=app.MapGroup("users").WithParameterValidation();;
@@ -58,9 +51,9 @@ public static class UsersEndpoints
         });
 
         //DELETE /users/id
-        group.MapDelete("/{id}", (int id) =>
+        group.MapDelete("/{id}", (int id, UserContext dbContext) =>
         {
-            users.RemoveAll(user => user.Id == id);
+            dbContext.Users.Where(user=>user.Id==id).ExecuteDelete();
             return Results.NoContent();
         }
         );
