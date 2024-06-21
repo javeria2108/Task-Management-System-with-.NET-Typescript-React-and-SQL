@@ -6,8 +6,9 @@ POST http://localhost:5068/users
 Content-Type: application/json
 
 {
-    "Name":"Dummy User 4Dummy User 4Dummy User 4Dummy User 4Dummy User 4Dummy User 4Dummy User 4Dummy User 4vDummy User 4Dummy User 4Dummy User 4",
-    "Email":"dummy4@gmail.com"
+    "Name":"Dummy User",
+    "Email":"dummy4@gmail.com",
+    "RoleId":3
 }
 ###
 PUT http://localhost:5068/users/1

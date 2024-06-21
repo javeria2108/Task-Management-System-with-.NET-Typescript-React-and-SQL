@@ -1,5 +1,10 @@
 ﻿namespace TaskManagement.Api.Endpoints;
+
+using TaskManagement.Api.Data;
 using TaskManagement.Api.Dtos;
+using TaskManagement.Api.Entities;
+using TaskManagement.Api.Mappings;
+
 public static class UsersEndpoints
 {
 
@@ -7,12 +12,7 @@ public static class UsersEndpoints
 
     private static readonly List<UserDto> users = [
         new(
-        1, "Javeria Zaheer", "javeriaz@gmail.com"
-    ),
-    new(
-        2, "Fatima Zaheer", "fatimaz@gmail.com"
-    ), new(
-        3, "dummy user 3", "dummyuser3@gmail.com"
+        1, "Javeria Zaheer", "javeriaz@gmail.com",1,"Admin"
     )
 
     ];
@@ -32,18 +32,18 @@ public static class UsersEndpoints
         }).WithName(getUserEndpoint);
 
         // POST /users
-        group.MapPost("/", (CreateUserDto newUser) =>
+        group.MapPost("/", (CreateUserDto newUser, UserContext dbContext) =>
         {
-            UserDto user = new(
-                users.Count + 1,
-                newUser.Name, newUser.Email
-            );
-            users.Add(user);
-            return Results.CreatedAtRoute(getUserEndpoint, new { id = user.Id }, user);
+            User user = newUser.ToEntity();
+            user.Role=dbContext.Roles.Find(user.RoleId);
+            dbContext.Users.Add(user);
+            dbContext.SaveChanges();
+            return Results.CreatedAtRoute(getUserEndpoint, new { id = user.Id },
+            user.ToDto() );
         });
 
         //PUT /users/id
-        group.MapPut("/{id}", (int id, UpdateUserDto updatedUser) =>
+        group.MapPut("/{id}", (int id, UpdateUserDto updatedUser, UserContext dbContext) =>
         {
             var index = users.FindIndex(user => user.Id == id);
             if (index == -1)
@@ -53,7 +53,9 @@ public static class UsersEndpoints
             users[index] = new UserDto(
                 id,
                 updatedUser.Name,
-                updatedUser.Email
+                updatedUser.Email,
+                updatedUser.RoleId,
+                dbContext.Roles.Find(updatedUser.RoleId)!.Name
             );
             return Results.NoContent();
         });
