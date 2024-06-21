@@ -16,44 +16,44 @@ public static class UsersEndpoints
         var group=app.MapGroup("users").WithParameterValidation();;
 
         //GET /users
-        group.MapGet("/", (UserContext dbContext) => 
-        dbContext.Users.Include(user=>user.Role).Select(user=>user.ToSummaryDto()).AsNoTracking());
+        group.MapGet("/", async (UserContext dbContext) => 
+      await dbContext.Users.Include(user=>user.Role).Select(user=>user.ToSummaryDto()).AsNoTracking().ToListAsync());
 
         //GET /users/id
-        group.MapGet("/{id}", (int id,UserContext dbContext) =>
+        group.MapGet("/{id}", async(int id,UserContext dbContext) =>
         {
-            User? user=dbContext.Users.Find(id);
+            User? user=await dbContext.Users.FindAsync(id);
             return user is null ? Results.NotFound() : Results.Ok(user.ToDetailsDto());
         }).WithName(getUserEndpoint);
 
         // POST /users
-        group.MapPost("/", (CreateUserDto newUser, UserContext dbContext) =>
-        {
+        group.MapPost("/", async (CreateUserDto newUser, UserContext dbContext) =>
+      {
             User user = newUser.ToEntity();
             user.Role=dbContext.Roles.Find(newUser.RoleId);
             dbContext.Users.Add(user);
-            dbContext.SaveChanges();
+             await dbContext.SaveChangesAsync();
             return Results.CreatedAtRoute(getUserEndpoint, new { id = user.Id },
             user.ToSummaryDto() );
         });
 
         //PUT /users/id
-        group.MapPut("/{id}", (int id, UpdateUserDto updatedUser, UserContext dbContext) =>
+        group.MapPut("/{id}", async (int id, UpdateUserDto updatedUser, UserContext dbContext) =>
         {
-            var existingUser=dbContext.Users.Find(id);
+           var existingUser=await  dbContext.Users.FindAsync(id);
             if (existingUser is null)
             {
                 return Results.NotFound();
             }
            dbContext.Entry(existingUser).CurrentValues.SetValues(updatedUser.ToEntity(id));
-           dbContext.SaveChanges();
+          await dbContext.SaveChangesAsync();
             return Results.NoContent();
         });
 
         //DELETE /users/id
-        group.MapDelete("/{id}", (int id, UserContext dbContext) =>
+        group.MapDelete("/{id}", async (int id, UserContext dbContext) =>
         {
-            dbContext.Users.Where(user=>user.Id==id).ExecuteDelete();
+           await dbContext.Users.Where(user=>user.Id==id).ExecuteDeleteAsync();
             return Results.NoContent();
         }
         );

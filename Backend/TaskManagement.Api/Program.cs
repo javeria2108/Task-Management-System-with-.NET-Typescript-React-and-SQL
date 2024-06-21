@@ -7,5 +7,5 @@ builder.Services.AddSqlite<UserContext>(connString);
 var app = builder.Build();
 
 app.MapUsersEndpoints();
-app.MigrateDb();
+await app.MigrateDbAsync();
 app.Run();
