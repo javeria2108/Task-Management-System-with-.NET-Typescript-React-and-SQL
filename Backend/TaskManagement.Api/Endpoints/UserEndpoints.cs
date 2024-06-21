@@ -1,5 +1,6 @@
 ﻿namespace TaskManagement.Api.Endpoints;
 
+using Microsoft.EntityFrameworkCore;
 using TaskManagement.Api.Data;
 using TaskManagement.Api.Dtos;
 using TaskManagement.Api.Entities;
@@ -10,9 +11,9 @@ public static class UsersEndpoints
 
     const string getUserEndpoint = "GetUser";
 
-    private static readonly List<UserDto> users = [
+    private static readonly List<UserDetailsDto> users = [
         new(
-        1, "Javeria Zaheer", "javeriaz@gmail.com",1,"Admin"
+        1, "Javeria Zaheer", "javeriaz@gmail.com",1
     )
 
     ];
@@ -22,41 +23,37 @@ public static class UsersEndpoints
         var group=app.MapGroup("users").WithParameterValidation();;
 
         //GET /users
-        group.MapGet("/", () => users);
+        group.MapGet("/", (UserContext dbContext) => 
+        dbContext.Users.Include(user=>user.Role).Select(user=>user.ToSummaryDto()).AsNoTracking());
 
         //GET /users/id
-        group.MapGet("/{id}", (int id) =>
+        group.MapGet("/{id}", (int id,UserContext dbContext) =>
         {
-            UserDto? user = users.Find(user => user.Id == id);
-            return user is null ? Results.NotFound() : Results.Ok(user);
+            User? user=dbContext.Users.Find(id);
+            return user is null ? Results.NotFound() : Results.Ok(user.ToDetailsDto());
         }).WithName(getUserEndpoint);
 
         // POST /users
         group.MapPost("/", (CreateUserDto newUser, UserContext dbContext) =>
         {
             User user = newUser.ToEntity();
-            user.Role=dbContext.Roles.Find(user.RoleId);
+            user.Role=dbContext.Roles.Find(newUser.RoleId);
             dbContext.Users.Add(user);
             dbContext.SaveChanges();
             return Results.CreatedAtRoute(getUserEndpoint, new { id = user.Id },
-            user.ToDto() );
+            user.ToSummaryDto() );
         });
 
         //PUT /users/id
         group.MapPut("/{id}", (int id, UpdateUserDto updatedUser, UserContext dbContext) =>
         {
-            var index = users.FindIndex(user => user.Id == id);
-            if (index == -1)
+            var existingUser=dbContext.Users.Find(id);
+            if (existingUser is null)
             {
                 return Results.NotFound();
             }
-            users[index] = new UserDto(
-                id,
-                updatedUser.Name,
-                updatedUser.Email,
-                updatedUser.RoleId,
-                dbContext.Roles.Find(updatedUser.RoleId)!.Name
-            );
+           dbContext.Entry(existingUser).CurrentValues.SetValues(updatedUser.ToEntity(id));
+           dbContext.SaveChanges();
             return Results.NoContent();
         });
 

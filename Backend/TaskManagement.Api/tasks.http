@@ -1,22 +1,23 @@
 GET http://localhost:5068/users
 ###
-GET http://localhost:5068/users/4
+GET http://localhost:5068/users/1
 ###
 POST http://localhost:5068/users
 Content-Type: application/json
 
 {
-    "Name":"Dummy User",
-    "Email":"dummy4@gmail.com",
-    "RoleId":3
+    "Name":"Harry Potter",
+    "Email":"harry123@gmail.com",
+    "RoleId":4
 }
 ###
 PUT http://localhost:5068/users/1
 Content-Type: application/json
 
 {
-    "Name":"Dummy User 1",
-    "Email":"dummy1@gmail.com"
+    "Name":"Bibla",
+    "Email":"bibla1@gmail.com",
+    "RoleId":2
 
 }
 ###
