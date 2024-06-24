@@ -1,3 +1,4 @@
+import './index.css';
 import {Register} from "./Users/Register"
 
 function App() {

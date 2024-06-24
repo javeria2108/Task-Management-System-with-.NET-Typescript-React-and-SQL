@@ -24,23 +24,32 @@ export function Register(){
     }).then(res=>res.json()).then(result=>(console.log(result))).catch(error=>console.log(error))
   }
     return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit) }
+    className="flex flex-col m-auto mt-5 sm:mt-14 p-5 h-2/3 w-3/5 sm:w-2/5 bg-black rounded-xl items-center">
+      <h1 className="text-center text-2xl sm:text-3xl text-white">Register</h1>
         <input {...register('name')}
-        placeholder="Username"/>
-        <span>{errors && errors.name?.message}</span>
+        placeholder="Username"
+        className="p-2 border rounded-xl w-3/5 mt-5"/>
+        <span className=" text-red-500">{errors && errors.name?.message}</span>
         <input {...register("email")}
-        placeholder="email"/>
-        <span>{errors && errors.email?.message}</span>
+        placeholder="email"
+        className="p-2 border rounded-xl w-3/5 mt-5"/>
+        <span className=" text-red-500">{errors && errors.email?.message}</span>
         <input {...register('password')}
-        placeholder="password"/>
-         <span>{errors && errors.password?.message}</span> 
+        type="password"
+        placeholder="password"
+        className="p-2 border rounded-xl w-3/5 mt-5"/>
+         <span className=" text-red-500">{errors && errors.password?.message}</span> 
          <input {...register('confirmPassword')
           
          }
-        placeholder="confirm password"/>
-        <span>{errors && errors.confirmPassword?.message}</span>
-         <button type="submit">Sign Up</button>
+         type="password"
+        placeholder="confirm password"
+        className="p-2 border rounded-xl w-3/5 mt-5"/>
+        <span className=" text-red-500">{errors && errors.confirmPassword?.message}</span>
+         <button type="submit"
+         className="mt-5 bg-pink rounded-lg p-2 w-1/3 text-white">Sign Up</button>
     </form>
   )
-}
+} 
 
