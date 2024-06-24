@@ -17,7 +17,7 @@ public static class UsersEndpoints
 
         //GET /users
         group.MapGet("/", async (UserContext dbContext) => 
-      await dbContext.Users.Include(user=>user.Role).Select(user=>user.ToSummaryDto()).AsNoTracking().ToListAsync());
+      await dbContext.Users.Select(user=>user.ToSummaryDto()).AsNoTracking().ToListAsync());
 
         //GET /users/id
         group.MapGet("/{id}", async(int id,UserContext dbContext) =>
@@ -30,7 +30,6 @@ public static class UsersEndpoints
         group.MapPost("/", async (CreateUserDto newUser, UserContext dbContext) =>
       {
             User user = newUser.ToEntity();
-            user.Role=dbContext.Roles.Find(newUser.RoleId);
             dbContext.Users.Add(user);
              await dbContext.SaveChangesAsync();
             return Results.CreatedAtRoute(getUserEndpoint, new { id = user.Id },

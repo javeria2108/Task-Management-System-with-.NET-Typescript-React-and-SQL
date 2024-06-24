@@ -8,7 +8,7 @@ Content-Type: application/json
 {
     "Name":"Harry Potter",
     "Email":"harry123@gmail.com",
-    "RoleId":4
+    "Password":"21dffd"
 }
 ###
 PUT http://localhost:5068/users/1
