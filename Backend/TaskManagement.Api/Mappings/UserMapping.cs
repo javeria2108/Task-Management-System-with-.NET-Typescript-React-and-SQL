@@ -1,5 +1,5 @@
-﻿using TaskManagement.Api.Dtos;
-using TaskManagement.Api.Entities;
+﻿using TaskManagement.Api.Dtos.UserDtos;
+using TaskManagement.Api.Models;
 
 namespace TaskManagement.Api.Mappings;
 
