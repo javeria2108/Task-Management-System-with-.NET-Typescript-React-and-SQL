@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TaskManagement.Api.Data;
+using TaskManagement.Api.Interfaces;
 using TaskManagement.Api.Models;
+using TaskManagement.Api.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,6 +54,8 @@ builder.Services.AddAuthentication(options=>{
         )
     };
 });
+
+builder.Services.AddScoped<ITokenService,TokenService>();
 var app = builder.Build();
 
 
