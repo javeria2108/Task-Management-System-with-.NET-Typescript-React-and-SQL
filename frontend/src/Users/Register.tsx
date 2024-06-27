@@ -9,7 +9,7 @@ export function Register(){
     resolver: zodResolver(UserSchema)})
   const onSubmit=()=>{
     console.log("submit");
-    fetch(`${variables.API_URL}/users`,
+    fetch(`${variables.API_URL}/api/account/register`,
       {
         method: "POST",
       headers:{
@@ -17,7 +17,7 @@ export function Register(){
         'Content-Type':'application/json'
       },
       body: JSON.stringify({
-        Name: getValues("name"),
+        Username: getValues("name"),
         Email:getValues("email"),
         Password:getValues("password")
       })
