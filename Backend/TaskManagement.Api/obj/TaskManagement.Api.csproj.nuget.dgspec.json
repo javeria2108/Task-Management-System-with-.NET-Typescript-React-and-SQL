@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\Backend\\TaskManagement.Api\\TaskManagement.Api.csproj": {}
+    "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\backend\\TaskManagement.Api\\TaskManagement.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\Backend\\TaskManagement.Api\\TaskManagement.Api.csproj": {
+    "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\backend\\TaskManagement.Api\\TaskManagement.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\Backend\\TaskManagement.Api\\TaskManagement.Api.csproj",
+        "projectUniqueName": "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\backend\\TaskManagement.Api\\TaskManagement.Api.csproj",
         "projectName": "TaskManagement.Api",
-        "projectPath": "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\Backend\\TaskManagement.Api\\TaskManagement.Api.csproj",
+        "projectPath": "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\backend\\TaskManagement.Api\\TaskManagement.Api.csproj",
         "packagesPath": "C:\\Users\\PMLS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\Backend\\TaskManagement.Api\\obj\\",
+        "outputPath": "C:\\Users\\PMLS\\Documents\\Web-Dev\\Task Management App\\backend\\TaskManagement.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PMLS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,19 +45,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-<<<<<<< HEAD
             "Microsoft.AspNetCore.Identity": {
               "target": "Package",
               "version": "[2.2.0, )"
-=======
-            "DotNetEnv": {
-              "target": "Package",
-              "version": "[3.0.0, )"
-            },
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
-              "target": "Package",
-              "version": "[8.0.6, )"
->>>>>>> e6df2cf2bc4591fc40b2f24a6846a871beee0a76
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -84,10 +74,6 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.6, )"
-            },
-            "Microsoft.Extensions.Identity.Core": {
               "target": "Package",
               "version": "[8.0.6, )"
             }
