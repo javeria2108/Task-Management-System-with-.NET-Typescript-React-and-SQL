@@ -2,8 +2,8 @@ import './index.css';
 import {Register} from "./Users/Register"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login } from './Users/Login';
-import AdminDashboard from './components/AdminDashboard/AdminDashboard';
-import UserDashboard from './components/UserDashboard/UserDashboard';
+import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
+import UserDashboard from './Pages/UserDashboard/UserDashboard';
 
 function App() {
 
