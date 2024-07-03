@@ -28,7 +28,7 @@ public class ApplicationDBContext: IdentityDbContext<User>
             builder.Entity<IdentityRole>().HasData(roles);
     }
 
-   public DbSet<TaskModel> Task{get;set;}
+   public DbSet<TaskModel> Task {get;set;}
 
 
 }
