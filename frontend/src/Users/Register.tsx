@@ -19,7 +19,7 @@ export function Register(){
     try {
       const user = await registerUser(userData).unwrap();
       dispatch(setUser({ username: user.username, email: user.email }));
-      console.log('User registered successfully: ', user);
+      console.log('User registered successfully: ', user.role);
     } catch (err) {
       console.error('Failed to register user: ', err);
     }

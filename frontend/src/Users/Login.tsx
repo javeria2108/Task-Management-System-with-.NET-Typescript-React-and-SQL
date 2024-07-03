@@ -20,7 +20,7 @@ export function Login() {
   const onSubmit = async (data: loginSchema) => {
     try {
       const response = await loginUser(data).unwrap();
-      dispatch(setCredentials({ token: response.token }));
+      dispatch(setCredentials({ user:response.username, token: response.token, role:response.role}));
       dispatch(setUser({ username: response.username, email: response.email }));
       console.log('User logged in successfully', response);
     } catch (err) {
