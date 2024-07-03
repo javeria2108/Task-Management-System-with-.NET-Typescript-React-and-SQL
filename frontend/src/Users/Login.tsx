@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { setCredentials } from '../redux/slices/AuthSlice';
 import { setUser } from '../redux/slices/UserSlice';
 import { LoginSchema, loginSchema } from "./types/UserSchema";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
   const { register, formState: { errors }, handleSubmit } = useForm<loginSchema>({
@@ -16,12 +17,14 @@ export function Login() {
 
   const [loginUser, { isLoading, isSuccess, isError, error }] = useLoginUserMutation();
   const dispatch = useDispatch();
+  const navigate=useNavigate();
 
   const onSubmit = async (data: loginSchema) => {
     try {
       const response = await loginUser(data).unwrap();
       dispatch(setCredentials({ user:response.username, token: response.token, role:response.role}));
       dispatch(setUser({ username: response.username, email: response.email }));
+      response.role=="Admin"? navigate('/admin/dashboard'):navigate('/user/dashboard')
       console.log('User logged in successfully', response);
     } catch (err) {
       console.error('Failed to log in user: ', err);
