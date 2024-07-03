@@ -98,5 +98,53 @@ namespace TaskManagement.Api.Controllers
                 return StatusCode(500, e);
             }
         }
+
+        [HttpPost("register-admin")]
+public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDto registerDto)
+{
+    try
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var appUser = new User
+        {
+            UserName = registerDto.Username,
+            Email = registerDto.Email
+        };
+
+        var createdUser = await _userManager.CreateAsync(appUser, registerDto.Password);
+
+        if (createdUser.Succeeded)
+        {
+            var roleResult = await _userManager.AddToRoleAsync(appUser, "Admin");
+            if (roleResult.Succeeded)
+            { var userRole = await _userManager.GetRolesAsync(appUser);
+                return Ok(
+                    new NewUserDto
+                    {
+                        UserName = appUser.UserName,
+                        Email = appUser.Email,
+                        Token = _tokenService.CreateToken(appUser),
+                        Role= userRole.FirstOrDefault()
+                    }
+                );
+            }
+            else
+            {
+                return StatusCode(500, roleResult.Errors);
+            }
+        }
+        else
+        {
+            return StatusCode(500, createdUser.Errors);
+        }
+    }
+    catch (Exception e)
+    {
+        return StatusCode(500, e);
+    }
+}
+
     }
 }
