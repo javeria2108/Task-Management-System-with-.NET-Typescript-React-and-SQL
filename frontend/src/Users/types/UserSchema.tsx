@@ -2,7 +2,7 @@ import { z } from "zod";
 import { patterns } from "../../constants";
 
 export const UserSchema = z.object({
-  name: z.string().min(1, { message: "please type a username" }),
+  username: z.string().min(1, { message: "please type a username" }),
   email: z
     .string()
     .min(1, { message: "please type an email" })
@@ -24,4 +24,11 @@ export const UserSchema = z.object({
       });
     }
   });
+
+export const LoginSchema = z.object({
+    username: z.string().min(1, 'Username is required'),
+    password: z.string().min(1, 'Password is required'),
+  });
+  
+export type loginSchema = z.infer<typeof LoginSchema>;  
 export type userSchema = z.infer<typeof UserSchema>;

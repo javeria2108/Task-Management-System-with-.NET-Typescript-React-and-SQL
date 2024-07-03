@@ -1,27 +1,31 @@
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { variables } from "../constants";
+import { Link } from "react-router-dom";
+import { useLoginUserMutation } from '../redux/api/apiSlice';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../redux/slices/AuthSlice';
+import { setUser } from '../redux/slices/UserSlice';
+import { LoginSchema, loginSchema } from "./types/UserSchema";
 
 export function Login() {
-  const { register, formState: { errors }, getValues, handleSubmit } = useForm({
-    mode: "all"
+  const { register, formState: { errors }, handleSubmit } = useForm<loginSchema>({
+    mode: "all",
+    resolver: zodResolver(LoginSchema)
   });
 
-  const onSubmit = () => {
-    console.log("submit");
-    fetch(`${variables.API_URL}/api/account/login`, {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        Username: getValues("username"),
-        Password: getValues("password")
-      })
-    })
-    .then(res => res.json())
-    .then(result => console.log(result))
-    .catch(error => console.log(error));
+  const [loginUser, { isLoading, isSuccess, isError, error }] = useLoginUserMutation();
+  const dispatch = useDispatch();
+
+  const onSubmit = async (data: loginSchema) => {
+    try {
+      const response = await loginUser(data).unwrap();
+      dispatch(setCredentials({ token: response.token }));
+      dispatch(setUser({ username: response.username, email: response.email }));
+      console.log('User logged in successfully', response);
+    } catch (err) {
+      console.error('Failed to log in user: ', err);
+    }
   };
 
   return (
@@ -42,7 +46,7 @@ export function Login() {
       
       <button type="submit"
         className="mt-5 bg-pink rounded-lg p-2 w-1/3 text-white">Login</button>
-      <p className="text-white pt-2 text-decoration-line: underline hover:cursor-pointer">New User? Click here to Register</p>
+        <Link to='/' className="text-white pt-2 text-decoration-line: underline hover:cursor-pointer">New user? Click here to register</Link> 
     </form>
   );
 }
