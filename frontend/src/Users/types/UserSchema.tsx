@@ -11,10 +11,7 @@ export const UserSchema = z.object({
     }),
   password: z
     .string()
-    .min(1, { message: "please type a password" })
-    .refine((password) => patterns.password.test(password), {
-      message: "your password must have atleast one letter and one number",
-    }),
+    .min(1, { message: "please type a password" }),
     confirmPassword: z
     .string()
    

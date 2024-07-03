@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSchema, userSchema } from "./types/UserSchema";
 import { variables } from "../constants";
+import { Link } from "react-router-dom";
 
 export function Register(){
   const {register, formState:{errors}, getValues,handleSubmit}=useForm<userSchema>({
@@ -9,7 +10,7 @@ export function Register(){
     resolver: zodResolver(UserSchema)})
   const onSubmit=()=>{
     console.log("submit");
-    fetch(`${variables.API_URL}/users`,
+    fetch(`${variables.API_URL}/api/account/register`,
       {
         method: "POST",
       headers:{
@@ -17,7 +18,7 @@ export function Register(){
         'Content-Type':'application/json'
       },
       body: JSON.stringify({
-        Name: getValues("name"),
+        Username: getValues("name"),
         Email:getValues("email"),
         Password:getValues("password")
       })
@@ -49,7 +50,7 @@ export function Register(){
         <span className=" text-red-500">{errors && errors.confirmPassword?.message}</span>
          <button type="submit"
          className="mt-5 bg-pink rounded-lg p-2 w-1/3 text-white">Sign Up</button>
-         <p className="text-white pt-2 text-decoration-line: underline hover:cursor-pointer">Already a user? Click here to sign in</p>
+         <Link to='/login' className="text-white pt-2 text-decoration-line: underline hover:cursor-pointer">Already a user? Click here to sign in</Link> 
     </form>
   )
 } 
