@@ -1,7 +1,7 @@
 import './index.css';
-import {Register} from "./Users/Register"
+import {Register} from "./Pages/Register"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Login } from './Users/Login';
+import { Login } from './Pages/Login';
 import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
 import UserDashboard from './Pages/UserDashboard/UserDashboard';
 
