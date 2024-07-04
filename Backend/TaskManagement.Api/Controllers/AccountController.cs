@@ -42,7 +42,7 @@ namespace TaskManagement.Api.Controllers
             return Ok(
                 new NewUserDto
                 {
-                    UserName = user.UserName,
+                    Username = user.UserName,
                     Email = user.Email,
                     Token = _tokenService.CreateToken(user),
                     Role=userRole.FirstOrDefault()
@@ -76,7 +76,7 @@ namespace TaskManagement.Api.Controllers
                         return Ok(
                             new NewUserDto
                             {
-                                UserName = appUser.UserName,
+                                Username = appUser.UserName,
                                 Email = appUser.Email,
                                 Token = _tokenService.CreateToken(appUser),
                                 Role = userRole.FirstOrDefault()
@@ -123,7 +123,7 @@ public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDto registerDt
                 return Ok(
                     new NewUserDto
                     {
-                        UserName = appUser.UserName,
+                        Username = appUser.UserName,
                         Email = appUser.Email,
                         Token = _tokenService.CreateToken(appUser),
                         Role= userRole.FirstOrDefault()

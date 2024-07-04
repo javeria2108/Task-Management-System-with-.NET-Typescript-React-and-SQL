@@ -9,6 +9,7 @@ import { setUser } from '../redux/slices/UserSlice';
 import { LoginSchema, loginSchema } from "../Users/types/UserSchema";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAppSelector } from "../redux/hooks";
 
 export function Login() {
   const { register, formState: { errors }, handleSubmit } = useForm<loginSchema>({
@@ -36,6 +37,8 @@ export function Login() {
     }
   };
 
+  const user=useAppSelector((state)=>state.auth.user)
+  console.log(user)
   return (
     <form onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col m-auto mt-5 sm:mt-14 p-5 h-2/3 w-3/5 sm:w-2/5 bg-black rounded-xl items-center">

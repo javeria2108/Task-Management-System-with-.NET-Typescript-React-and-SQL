@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/AuthSlice';
 import userReducer from './slices/UserSlice';
+import tasksReducer from './slices/TasksSlice'
 import { apiSlice } from './api/apiSlice';
 
 const preloadedState = {
@@ -15,6 +16,7 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     user: userReducer,
+    tasks: tasksReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },preloadedState,
   middleware: (getDefaultMiddleware) =>
