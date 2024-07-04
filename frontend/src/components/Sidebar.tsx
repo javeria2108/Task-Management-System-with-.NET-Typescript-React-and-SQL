@@ -17,14 +17,18 @@ function Sidebar() {
   const onMyTasksClick=()=>{
     navigate('/layout/tasks')
   }
-
+ 
+  const onDashboardClick=()=>{
+    navigate('/layout')
+  }
   return (
     <div className="flex flex-col px-5 py-10 text-white">
       <div className="flex flex-row gap-2 px-2 py-4 hover:bg-pink focus:bg-pink rounded-lg hover:cursor-pointer ">
         <FontAwesomeIcon icon="power-off" size="2x" />
         <p className="text-lg">My Profile</p>
       </div>
-      <div className="flex flex-row gap-2 px-2 py-4 hover:bg-pink focus:bg-pink rounded-lg hover:cursor-pointer">
+      <div className="flex flex-row gap-2 px-2 py-4 hover:bg-pink focus:bg-pink rounded-lg hover:cursor-pointer"
+      onClick={()=>onDashboardClick()}>
         <FontAwesomeIcon icon="power-off" size="2x" />
         <p className="text-lg">Dashboard</p>
       </div>
