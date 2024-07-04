@@ -9,10 +9,16 @@ export default {
     extend: {
       colors: {
         'bg': '#D6D6D6',
-        'green':'#4DAE80',
-        'pink':'#F74070',
-        'orange':'#F5BC70',
-        'blue':'#7A84F2'
+        'green':'#05CC95',
+        'pink':'#FDB1C6',
+        'orange':'#FF8737',
+        'blue':'#2DBEF5',
+        'yellow':'#FFC100',
+        'darkGrey':'#242132',
+        'lightGrey':'#363344',
+        'MediumGrey':'#403C55',
+        'purple':'#AB66FF'
+
       },ringColor:{
         DEFAULT: '#F5BC70'
       },
