@@ -27,4 +27,17 @@ public static class TaskMappings
             Priority=task.Priority
         };
     }
+
+     public static TaskDetailsDto ToTaskDetailsDto(this TaskModel taskModel)
+    {
+        return new TaskDetailsDto{
+            Id = taskModel.Id,
+            Name = taskModel.Name,
+            Description = taskModel.Description,
+            Priority = taskModel.Priority,
+            Category = taskModel.Category,
+            Duedate = taskModel.Duedate,
+            Status = taskModel.Status
+        };
+    }
 }

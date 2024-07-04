@@ -21,7 +21,10 @@ export const apiSlice = createApi({
     fetchUser: builder.query({
       query: () => 'account/me',
     }),
+    fetchTasksByUser: builder.query({
+        query: () => 'tasks/getbyuserid',
+      }),
   }),
 });
 
-export const { useRegisterUserMutation, useLoginUserMutation, useFetchUserQuery } = apiSlice;
+export const { useRegisterUserMutation, useLoginUserMutation, useFetchUserQuery, useFetchTasksByUserQuery } = apiSlice;

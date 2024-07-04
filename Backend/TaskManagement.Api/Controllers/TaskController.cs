@@ -40,14 +40,30 @@ namespace TaskManagement.Api.Controllers
         }
         return Ok(task.ToTaskSummaryDto());
     }
+    [HttpGet("user/{username}")]
+        public async Task<IActionResult> GetAllByUserId([FromRoute] string username)
+        {
+           var currentUser=await _userManager.Users.FirstOrDefaultAsync(x=>x.UserName==username);
+           if(currentUser==null){
+            return NotFound();
+           }
+            // Fetch tasks associated with the current user
+            var tasks = await _context.Task
+                .Where(task => task.User.Id == currentUser.Id) // Assuming UserId is the foreign key in Task
+                .ToListAsync();
+
+            var taskDtos = tasks.Select(task => task.ToTaskDetailsDto());
+            return Ok(taskDtos);
+        }
 
     [HttpPost]
     public async Task<IActionResult> CreateTask([FromBody] CreateTaskDto taskDto){
         var newTask=taskDto.ToEntity();
         newTask.User=await _userManager.Users.FirstOrDefaultAsync(x=>x.UserName==taskDto.Username);
+        newTask.Status="pending";
        await  _context.Task.AddAsync(newTask);
        await  _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetById),new {id=newTask.Id},newTask.ToTaskSummaryDto());
+        return CreatedAtAction(nameof(GetById),new {id=newTask.Id},newTask.ToTaskDetailsDto());
 
     }
     [HttpPut("{id}")]
