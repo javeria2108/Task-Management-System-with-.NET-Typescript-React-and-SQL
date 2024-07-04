@@ -8,6 +8,7 @@ import { setCredentials } from '../redux/slices/AuthSlice';
 import { setUser } from '../redux/slices/UserSlice';
 import { LoginSchema, loginSchema } from "../Users/types/UserSchema";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export function Login() {
   const { register, formState: { errors }, handleSubmit } = useForm<loginSchema>({
@@ -15,9 +16,10 @@ export function Login() {
     resolver: zodResolver(LoginSchema)
   });
 
-  const [loginUser, { isLoading, isSuccess, isError, error }] = useLoginUserMutation();
+  const [loginUser] = useLoginUserMutation();
   const dispatch = useDispatch();
   const navigate=useNavigate();
+  const [error,setError]=useState('');
 
   const onSubmit = async (data: loginSchema) => {
     try {
@@ -26,8 +28,11 @@ export function Login() {
       dispatch(setUser({ username: response.username, email: response.email }));
       navigate('/layout')
       console.log('User logged in successfully', response);
-    } catch (err) {
-      console.error('Failed to log in user: ', err);
+    }catch (err) {
+      if (err && typeof err === 'object' && 'data' in err) {
+        console.error('Failed to log in user: ', (err as { data: any }).data);
+        setError(err.data as string)
+      }
     }
   };
 
@@ -46,6 +51,7 @@ export function Login() {
         placeholder="Password"
         className="p-2 border rounded-xl w-3/5 mt-5" />
       <span className="text-red-500">{errors.password?.message?.toString()}</span>
+      <span className="text-red-500 p-2">{error}</span>
       
       <button type="submit"
         className="mt-5 bg-green rounded-lg p-2 w-1/3 text-white">Login</button>
