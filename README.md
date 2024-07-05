@@ -5,9 +5,7 @@
 ## Table of Contents
 - [Prerequisites](#prerequisites)
 - [Backend Setup](#backend-setup)
-  - [Running the Backend](#running-the-backend)
 - [Frontend Setup](#frontend-setup)
-  - [Running the Frontend](#running-the-frontend)
 - [Tech Stack](#tech-stack)
 - [Additional Information](#additional-information)
 
