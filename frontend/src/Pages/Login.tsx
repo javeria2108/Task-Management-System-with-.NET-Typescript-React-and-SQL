@@ -26,7 +26,7 @@ export function Login() {
     try {
       const response = await loginUser(data).unwrap();
       dispatch(setCredentials({ user:response.username, token: response.token, role:response.role}));
-      dispatch(setUser({ username: response.username, email: response.email }));
+      dispatch(setUser({id: response.id, username: response.username, email: response.email }));
       navigate('/layout')
       console.log('User logged in successfully', response);
     }catch (err) {

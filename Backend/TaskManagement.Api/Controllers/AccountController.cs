@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client.Extensibility;
 using TaskManagement.Api.Dtos.AuthDtos;
 using TaskManagement.Api.Interfaces;
 using TaskManagement.Api.Models;
@@ -42,6 +43,7 @@ namespace TaskManagement.Api.Controllers
             return Ok(
                 new NewUserDto
                 {
+                    Id=user.Id,
                     Username = user.UserName,
                     Email = user.Email,
                     Token = _tokenService.CreateToken(user),
@@ -76,6 +78,7 @@ namespace TaskManagement.Api.Controllers
                         return Ok(
                             new NewUserDto
                             {
+                                Id=appUser.Id,
                                 Username = appUser.UserName,
                                 Email = appUser.Email,
                                 Token = _tokenService.CreateToken(appUser),
@@ -123,6 +126,7 @@ public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDto registerDt
                 return Ok(
                     new NewUserDto
                     {
+                        Id=appUser.Id,
                         Username = appUser.UserName,
                         Email = appUser.Email,
                         Token = _tokenService.CreateToken(appUser),

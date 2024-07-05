@@ -51,13 +51,13 @@ namespace TaskManagement.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "93619a97-6dff-4c66-a1e0-513626792fe1",
+                            Id = "2acac8aa-cc61-4f35-99cf-5b670f99cd13",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "128c0747-3731-43b9-a75b-d284d78dc911",
+                            Id = "a2d05adf-57f3-412a-89a3-462db3f841e9",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -169,6 +169,28 @@ namespace TaskManagement.Api.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("TaskManagement.Api.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("TaskManagement.Api.Models.TaskModel", b =>
                 {
                     b.Property<int>("Id")
@@ -209,6 +231,23 @@ namespace TaskManagement.Api.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Task");
+                });
+
+            modelBuilder.Entity("TaskManagement.Api.Models.Team", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Teams");
                 });
 
             modelBuilder.Entity("TaskManagement.Api.Models.User", b =>
@@ -276,6 +315,42 @@ namespace TaskManagement.Api.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("TaskManagement.Api.Models.UserProfile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContactInformation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfilePictureUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserProfiles");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -327,6 +402,17 @@ namespace TaskManagement.Api.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TaskManagement.Api.Models.Category", b =>
+                {
+                    b.HasOne("TaskManagement.Api.Models.Team", "Team")
+                        .WithMany("Categories")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Team");
+                });
+
             modelBuilder.Entity("TaskManagement.Api.Models.TaskModel", b =>
                 {
                     b.HasOne("TaskManagement.Api.Models.User", "User")
@@ -336,6 +422,32 @@ namespace TaskManagement.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TaskManagement.Api.Models.UserProfile", b =>
+                {
+                    b.HasOne("TaskManagement.Api.Models.Team", "Team")
+                        .WithMany("UserProfiles")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TaskManagement.Api.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Team");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TaskManagement.Api.Models.Team", b =>
+                {
+                    b.Navigation("Categories");
+
+                    b.Navigation("UserProfiles");
                 });
 #pragma warning restore 612, 618
         }

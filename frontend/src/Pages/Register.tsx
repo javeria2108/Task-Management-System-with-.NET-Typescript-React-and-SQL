@@ -29,7 +29,7 @@ export function Register() {
     const { confirmPassword, ...userData } = data; // omit confirmPassword
     try {
       const user = await registerUser(userData).unwrap();
-      dispatch(setUser({ username: user.username, email: user.email }));
+      dispatch(setUser({ id: user.Id, username: user.username, email: user.email }));
       console.log("User registered successfully: ", user.role);
       navigate("/layout");
     } catch (err) {

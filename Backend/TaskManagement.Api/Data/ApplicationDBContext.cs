@@ -4,15 +4,19 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 namespace TaskManagement.Api.Data;
 
-public class ApplicationDBContext: IdentityDbContext<User>
+public class ApplicationDBContext : IdentityDbContext<User>
 {
-  public ApplicationDBContext(DbContextOptions dbContextOptions): base(dbContextOptions){
+    public ApplicationDBContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+    {
 
-  }
+    }
+    public DbSet<UserProfile> UserProfiles { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Team> Teams { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-           List<IdentityRole> roles = new List<IdentityRole>
+        List<IdentityRole> roles = new List<IdentityRole>
             {
                 new IdentityRole
                 {
@@ -25,10 +29,10 @@ public class ApplicationDBContext: IdentityDbContext<User>
                     NormalizedName = "USER"
                 },
             };
-            builder.Entity<IdentityRole>().HasData(roles);
+        builder.Entity<IdentityRole>().HasData(roles);
     }
 
-   public DbSet<TaskModel> Task {get;set;}
+    public DbSet<TaskModel> Task { get; set; }
 
 
 }
