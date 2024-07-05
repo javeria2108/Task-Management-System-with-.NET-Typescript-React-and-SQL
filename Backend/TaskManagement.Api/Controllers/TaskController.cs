@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagement.Api.Data;
 using TaskManagement.Api.Dtos.TaskDtos;
+using TaskManagement.Api.Interfaces;
 using TaskManagement.Api.Mappings;
 using TaskManagement.Api.Models;
 
@@ -16,86 +17,76 @@ namespace TaskManagement.Api.Controllers
     [Route("api/tasks")]
     [ApiController]
     public class TaskControllers : ControllerBase
-{
-    private readonly ApplicationDBContext _context;
+    {
+        private readonly ApplicationDBContext _context;
 
- private readonly UserManager<User> _userManager;
-        public TaskControllers(UserManager<User> userManager,ApplicationDBContext context)
+        private readonly UserManager<User> _userManager;
+        private readonly ITasksRepository _tasksRepo;
+        public TaskControllers(UserManager<User> userManager, ApplicationDBContext context, ITasksRepository tasksRepo)
         {
             _context = context;
-             _userManager = userManager;
+            _userManager = userManager;
+            _tasksRepo=tasksRepo;
         }
 
         [HttpGet]
-    public async Task<IActionResult> GetAll(){
-        var tasks=await _context.Task.ToListAsync();
-        var taskDtos= tasks.Select(task=>task.ToTaskSummaryDto());
-        return Ok(taskDtos);
-    }
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById([FromRoute] int id){
-        var task=await _context.Task.FindAsync(id);
-        if (task==null){
-            return NotFound();
+        public async Task<IActionResult> GetAll()
+        {
+            var tasks = await _tasksRepo.GetAllAsync();
+            var taskDtos = tasks.Select(task => task.ToTaskSummaryDto());
+            return Ok(taskDtos);
         }
-        return Ok(task.ToTaskSummaryDto());
-    }
-    [HttpGet("user/{username}")]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            var task = await _tasksRepo.GetByIdAsync(id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+            return Ok(task.ToTaskSummaryDto());
+        }
+        [HttpGet("user/{username}")]
         public async Task<IActionResult> GetAllByUserId([FromRoute] string username)
         {
-           var currentUser=await _userManager.Users.FirstOrDefaultAsync(x=>x.UserName==username);
-           if(currentUser==null){
-            return NotFound();
-           }
-            // Fetch tasks associated with the current user
-            var tasks = await _context.Task
-                .Where(task => task.User.Id == currentUser.Id) // Assuming UserId is the foreign key in Task
-                .ToListAsync();
+            var tasks = await _tasksRepo.GetTasksByUserAsync(username);
+              
+            if (tasks == null)
+            {
+                return NotFound();
+            }
+           
 
             var taskDtos = tasks.Select(task => task.ToTaskDetailsDto());
             return Ok(taskDtos);
         }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateTask([FromBody] CreateTaskDto taskDto){
-        var newTask=taskDto.ToEntity();
-        newTask.User=await _userManager.Users.FirstOrDefaultAsync(x=>x.UserName==taskDto.Username);
-        newTask.Status="pending";
-       await  _context.Task.AddAsync(newTask);
-       await  _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetById),new {id=newTask.Id},newTask.ToTaskDetailsDto());
+        [HttpPost]
+        public async Task<IActionResult> CreateTask([FromBody] CreateTaskDto taskDto)
+        {
+            var newTask = await _tasksRepo.CreateAsync(taskDto);
+            return CreatedAtAction(nameof(GetById), new { id = newTask.Id }, newTask.ToTaskDetailsDto());
 
-    }
-    [HttpPut("{id}")]
-
-    public async Task<IActionResult> UpdateTask([FromRoute] int id, [FromBody] UpdateTaskDto updatedTaskDto){
-        var existingTask=await _context.Task.FirstOrDefaultAsync(task=>Convert.ToInt32(task.Id)==id);
-        if (existingTask==null){
-            return NotFound();
         }
-        existingTask.Name=updatedTaskDto.Name;
-        existingTask.Description=updatedTaskDto.Description;
-        existingTask.Duedate=updatedTaskDto.Duedate;
-        existingTask.Category=updatedTaskDto.Category;
-        existingTask.Priority=updatedTaskDto.Priority;
-        existingTask.Status=updatedTaskDto.Status;
+        [HttpPut("{id}")]
 
-
-        await _context.SaveChangesAsync();
-        return Ok(existingTask.ToTaskSummaryDto());
-    }
-
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteTask([FromRoute] int id){
-         var existingTask=await _context.Task.FirstOrDefaultAsync(user=>Convert.ToInt32(user.Id)==id);
-        if (existingTask==null){
-            return NotFound();
+        public async Task<IActionResult> UpdateTask([FromRoute] int id, [FromBody] UpdateTaskDto updatedTaskDto)
+        {
+            var updatedTask = await _tasksRepo.UpdateAsync(id,updatedTaskDto);
+            return Ok(updatedTask.ToTaskSummaryDto());
         }
-        _context.Remove(existingTask);
-        await _context.SaveChangesAsync();
-        return NoContent();
-    }
 
-}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTask([FromRoute] int id)
+        {
+            var existingTask = await _tasksRepo.DeleteAsync(id);
+            if (existingTask == null)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
+
+    }
 }
 

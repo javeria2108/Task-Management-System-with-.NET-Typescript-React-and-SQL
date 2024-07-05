@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using TaskManagement.Api.Data;
 using TaskManagement.Api.Interfaces;
 using TaskManagement.Api.Models;
+using TaskManagement.Api.Repositories;
 using TaskManagement.Api.Services;
 
 
@@ -56,6 +57,7 @@ builder.Services.AddAuthentication(options=>{
 });
 
 builder.Services.AddScoped<ITokenService,TokenService>();
+builder.Services.AddScoped<ITasksRepository, TaskRepository>();
 var app = builder.Build();
 
 
