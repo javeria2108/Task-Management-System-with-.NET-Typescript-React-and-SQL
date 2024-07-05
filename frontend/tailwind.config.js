@@ -17,7 +17,9 @@ export default {
         'darkGrey':'#242132',
         'lightGrey':'#363344',
         'MediumGrey':'#403C55',
-        'purple':'#AB66FF'
+        'purple':'#AB66FF',
+        'lightPurple':"#6C5569",
+        "lightPink":"#FFCBC8"
 
       },ringColor:{
         DEFAULT: '#F5BC70'
