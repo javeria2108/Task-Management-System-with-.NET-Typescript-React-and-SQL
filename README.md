@@ -73,6 +73,13 @@ The frontend will be available at ` http://localhost:5173/`.
 
 # Tech Stack:
 Following Tech Stack is being implemented:
+- React + Typescript for frontend
+- ASP.NET Core Web Api
+- SQL Server Management Studio for database
+- Redux for state management in React
+- Serilog for Application logging (to be implemented)
+- xUnit for unit testing (to be implemented)
+- SonarQube for analyzing code quality (to be implemented)
 
 ## Additional Information
 TBD
