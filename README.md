@@ -53,6 +53,7 @@ dotnet run
 ```
 The backend API will be available at `http://localhost:5068`
 
+
 ## Frontend Setup
 ### 1. Navigate to the frontend directory:
 ```bash
@@ -70,6 +71,16 @@ npm install
 npm start
 ```
 The frontend will be available at ` http://localhost:5173/`.
+
+### 4. Register/Login
+
+Register page will appear when the app runs: 
+
+ ![image](https://github.com/javeria2108/Task-Management-System-with-.NET-Typescript-React-and-SQL/assets/96229240/2c8c2509-bc52-47c2-a3c3-72362361a525)
+ 
+ Login Page: 
+
+ ![image](https://github.com/javeria2108/Task-Management-System-with-.NET-Typescript-React-and-SQL/assets/96229240/5f31183f-0b06-4a73-ab8d-c665ae68aa11)
 
 # Tech Stack:
 Following Tech Stack is being implemented:
