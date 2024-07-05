@@ -51,13 +51,13 @@ namespace TaskManagement.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2acac8aa-cc61-4f35-99cf-5b670f99cd13",
+                            Id = "0a5562aa-f8ee-45db-93fd-c822316e8177",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a2d05adf-57f3-412a-89a3-462db3f841e9",
+                            Id = "edfb7962-7f9e-4f16-b0b5-78933c5214c1",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -189,6 +189,380 @@ namespace TaskManagement.Api.Migrations
                     b.HasIndex("TeamId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Stakeholder Interviews",
+                            TeamId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Requirements Documentation",
+                            TeamId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Use Case Analysis",
+                            TeamId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Requirements Review",
+                            TeamId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "System Architecture Design",
+                            TeamId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "UI/UX Design",
+                            TeamId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Database Design",
+                            TeamId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Technical Specification",
+                            TeamId = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Frontend Development",
+                            TeamId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Backend Development",
+                            TeamId = 3
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "API Development",
+                            TeamId = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Mobile App Development",
+                            TeamId = 3
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Integration Development",
+                            TeamId = 3
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Unit Testing",
+                            TeamId = 4
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Integration Testing",
+                            TeamId = 4
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "System Testing",
+                            TeamId = 4
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "User Acceptance Testing (UAT)",
+                            TeamId = 4
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "Performance Testing",
+                            TeamId = 4
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "Security Testing",
+                            TeamId = 4
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = "Deployment Planning",
+                            TeamId = 5
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Name = "Server Setup",
+                            TeamId = 5
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Name = "Continuous Integration/Continuous Deployment (CI/CD)",
+                            TeamId = 5
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Name = "Environment Configuration",
+                            TeamId = 5
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Name = "Bug Fixes",
+                            TeamId = 6
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Name = "Performance Optimization",
+                            TeamId = 6
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Name = "Security Patches",
+                            TeamId = 6
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Name = "System Monitoring",
+                            TeamId = 6
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Name = "Project Planning",
+                            TeamId = 7
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Name = "Resource Allocation",
+                            TeamId = 7
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Name = "Progress Tracking",
+                            TeamId = 7
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Name = "Risk Management",
+                            TeamId = 7
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Name = "Client Communication",
+                            TeamId = 7
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Name = "Technical Documentation",
+                            TeamId = 8
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Name = "User Manuals",
+                            TeamId = 8
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Name = "API Documentation",
+                            TeamId = 8
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Name = "Change Logs",
+                            TeamId = 8
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Name = "Code Review",
+                            TeamId = 9
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Name = "Test Case Development",
+                            TeamId = 9
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Name = "Test Automation",
+                            TeamId = 9
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Name = "QA Reporting",
+                            TeamId = 9
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Name = "Developer Training",
+                            TeamId = 10
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Name = "User Training",
+                            TeamId = 10
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Name = "Onboarding Documentation",
+                            TeamId = 10
+                        },
+                        new
+                        {
+                            Id = 44,
+                            Name = "Feasibility Studies",
+                            TeamId = 11
+                        },
+                        new
+                        {
+                            Id = 45,
+                            Name = "Proof of Concept (PoC)",
+                            TeamId = 11
+                        },
+                        new
+                        {
+                            Id = 46,
+                            Name = "Technology Evaluation",
+                            TeamId = 11
+                        },
+                        new
+                        {
+                            Id = 47,
+                            Name = "Prototyping",
+                            TeamId = 11
+                        },
+                        new
+                        {
+                            Id = 48,
+                            Name = "Customer Support",
+                            TeamId = 12
+                        },
+                        new
+                        {
+                            Id = 49,
+                            Name = "Help Desk",
+                            TeamId = 12
+                        },
+                        new
+                        {
+                            Id = 50,
+                            Name = "Technical Support",
+                            TeamId = 12
+                        },
+                        new
+                        {
+                            Id = 51,
+                            Name = "Market Research",
+                            TeamId = 13
+                        },
+                        new
+                        {
+                            Id = 52,
+                            Name = "Sales Strategy",
+                            TeamId = 13
+                        },
+                        new
+                        {
+                            Id = 53,
+                            Name = "Product Demos",
+                            TeamId = 13
+                        },
+                        new
+                        {
+                            Id = 54,
+                            Name = "Marketing Campaigns",
+                            TeamId = 13
+                        },
+                        new
+                        {
+                            Id = 55,
+                            Name = "Recruitment",
+                            TeamId = 14
+                        },
+                        new
+                        {
+                            Id = 56,
+                            Name = "Employee Onboarding",
+                            TeamId = 14
+                        },
+                        new
+                        {
+                            Id = 57,
+                            Name = "Performance Reviews",
+                            TeamId = 14
+                        },
+                        new
+                        {
+                            Id = 58,
+                            Name = "Employee Training",
+                            TeamId = 14
+                        },
+                        new
+                        {
+                            Id = 59,
+                            Name = "Budgeting",
+                            TeamId = 15
+                        },
+                        new
+                        {
+                            Id = 60,
+                            Name = "Financial Reporting",
+                            TeamId = 15
+                        },
+                        new
+                        {
+                            Id = 61,
+                            Name = "Invoice Management",
+                            TeamId = 15
+                        },
+                        new
+                        {
+                            Id = 62,
+                            Name = "Administrative Support",
+                            TeamId = 15
+                        });
                 });
 
             modelBuilder.Entity("TaskManagement.Api.Models.TaskModel", b =>
@@ -248,6 +622,83 @@ namespace TaskManagement.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Teams");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Requirements Gathering"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Design"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Development"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Testing"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Deployment"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Maintenance"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Project Management"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Documentation"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Quality Assurance"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Training"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Research and Development"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Client Support"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Sales and Marketing"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Human Resources"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Finance and Administration"
+                        });
                 });
 
             modelBuilder.Entity("TaskManagement.Api.Models.User", b =>
