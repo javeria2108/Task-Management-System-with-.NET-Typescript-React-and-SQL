@@ -51,13 +51,13 @@ namespace TaskManagement.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0a5562aa-f8ee-45db-93fd-c822316e8177",
+                            Id = "24f34061-f8a8-482d-92c6-9309fcb40ce5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "edfb7962-7f9e-4f16-b0b5-78933c5214c1",
+                            Id = "d8d51d40-25f8-4817-bd08-19373348100f",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -775,15 +775,12 @@ namespace TaskManagement.Api.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ContactInformation")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfilePictureUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TeamId")

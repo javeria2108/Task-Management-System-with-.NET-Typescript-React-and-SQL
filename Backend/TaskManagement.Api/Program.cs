@@ -58,6 +58,7 @@ builder.Services.AddAuthentication(options=>{
 
 builder.Services.AddScoped<ITokenService,TokenService>();
 builder.Services.AddScoped<ITasksRepository, TaskRepository>();
+builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 var app = builder.Build();
 
 

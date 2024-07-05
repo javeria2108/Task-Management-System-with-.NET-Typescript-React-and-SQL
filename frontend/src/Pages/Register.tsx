@@ -83,7 +83,7 @@ export function Register() {
       >
         Sign Up
       </button>
-      {apiErrors.length > 0 && (
+      {apiErrors && apiErrors.length > 0 && (
         <div className="text-red-500 p-2">
           {apiErrors.map((error, index) => (
             <p key={index}>{error.description}</p>

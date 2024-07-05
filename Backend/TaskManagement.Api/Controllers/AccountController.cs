@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client.Extensibility;
 using TaskManagement.Api.Dtos.AuthDtos;
 using TaskManagement.Api.Interfaces;
+using TaskManagement.Api.Mappings;
 using TaskManagement.Api.Models;
 
 namespace TaskManagement.Api.Controllers
@@ -19,11 +19,18 @@ namespace TaskManagement.Api.Controllers
         private readonly UserManager<User> _userManager;
         private readonly ITokenService _tokenService;
         private readonly SignInManager<User> _signinManager;
-        public AccountController(UserManager<User> userManager,ITokenService tokenService,  SignInManager<User> signInManager)
+        private readonly IUserProfileRepository _userProfileRepository;
+
+        public AccountController(
+            UserManager<User> userManager,
+            ITokenService tokenService,
+            SignInManager<User> signInManager,
+            IUserProfileRepository userProfileRepository)
         {
             _userManager = userManager;
             _signinManager = signInManager;
-            _tokenService=tokenService;
+            _tokenService = tokenService;
+            _userProfileRepository = userProfileRepository;
         }
 
         [HttpPost("login")]
@@ -39,17 +46,16 @@ namespace TaskManagement.Api.Controllers
             var result = await _signinManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
             if (!result.Succeeded) return Unauthorized("Username not found and/or password incorrect");
+
             var userRole = await _userManager.GetRolesAsync(user);
-            return Ok(
-                new NewUserDto
-                {
-                    Id=user.Id,
-                    Username = user.UserName,
-                    Email = user.Email,
-                    Token = _tokenService.CreateToken(user),
-                    Role=userRole.FirstOrDefault()
-                }
-            );
+            return Ok(new NewUserDto
+            {
+                Id = user.Id,
+                Username = user.UserName,
+                Email = user.Email,
+                Token = _tokenService.CreateToken(user),
+                Role = userRole.FirstOrDefault()
+            });
         }
 
         [HttpPost("register")]
@@ -72,19 +78,27 @@ namespace TaskManagement.Api.Controllers
                 {
                     var roleResult = await _userManager.AddToRoleAsync(appUser, "User");
                     if (roleResult.Succeeded)
-                    
                     {
-                         var userRole = await _userManager.GetRolesAsync(appUser);
-                        return Ok(
-                            new NewUserDto
-                            {
-                                Id=appUser.Id,
-                                Username = appUser.UserName,
-                                Email = appUser.Email,
-                                Token = _tokenService.CreateToken(appUser),
-                                Role = userRole.FirstOrDefault()
-                            }
-                        );
+                        // Create user profile
+                        var userProfile = new UserProfile
+                        {
+                            UserId = appUser.Id,
+                            ProfilePictureUrl = "",
+                            ContactInformation = "",
+                            PhoneNumber = "",
+                            TeamId=1
+                        };
+                        await _userProfileRepository.AddUserProfileAsync(userProfile);
+
+                        var userRole = await _userManager.GetRolesAsync(appUser);
+                        return Ok(new NewUserDto
+                        {
+                            Id = appUser.Id,
+                            Username = appUser.UserName,
+                            Email = appUser.Email,
+                            Token = _tokenService.CreateToken(appUser),
+                            Role = userRole.FirstOrDefault()
+                        });
                     }
                     else
                     {
@@ -103,52 +117,61 @@ namespace TaskManagement.Api.Controllers
         }
 
         [HttpPost("register-admin")]
-public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDto registerDto)
-{
-    try
-    {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
-        var appUser = new User
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDto registerDto)
         {
-            UserName = registerDto.Username,
-            Email = registerDto.Email
-        };
-
-        var createdUser = await _userManager.CreateAsync(appUser, registerDto.Password);
-
-        if (createdUser.Succeeded)
-        {
-            var roleResult = await _userManager.AddToRoleAsync(appUser, "Admin");
-            if (roleResult.Succeeded)
-            { var userRole = await _userManager.GetRolesAsync(appUser);
-                return Ok(
-                    new NewUserDto
-                    {
-                        Id=appUser.Id,
-                        Username = appUser.UserName,
-                        Email = appUser.Email,
-                        Token = _tokenService.CreateToken(appUser),
-                        Role= userRole.FirstOrDefault()
-                    }
-                );
-            }
-            else
+            try
             {
-                return StatusCode(500, roleResult.Errors);
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                var appUser = new User
+                {
+                    UserName = registerDto.Username,
+                    Email = registerDto.Email
+                };
+
+                var createdUser = await _userManager.CreateAsync(appUser, registerDto.Password);
+
+                if (createdUser.Succeeded)
+                {
+                    var roleResult = await _userManager.AddToRoleAsync(appUser, "Admin");
+                    if (roleResult.Succeeded)
+                    {
+                        // Create user profile
+                        var userProfile = new UserProfile
+                        {
+                            UserId = appUser.Id,
+                            ProfilePictureUrl = null,
+                            ContactInformation = null,
+                            PhoneNumber = null,
+                            TeamId = 0 // Set default or null value for TeamId
+                        };
+                        await _userProfileRepository.AddUserProfileAsync(userProfile);
+
+                        var userRole = await _userManager.GetRolesAsync(appUser);
+                        return Ok(new NewUserDto
+                        {
+                            Id = appUser.Id,
+                            Username = appUser.UserName,
+                            Email = appUser.Email,
+                            Token = _tokenService.CreateToken(appUser),
+                            Role = userRole.FirstOrDefault()
+                        });
+                    }
+                    else
+                    {
+                        return StatusCode(500, roleResult.Errors);
+                    }
+                }
+                else
+                {
+                    return StatusCode(500, createdUser.Errors);
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e);
             }
         }
-        else
-        {
-            return StatusCode(500, createdUser.Errors);
-        }
-    }
-    catch (Exception e)
-    {
-        return StatusCode(500, e);
-    }
-}
-
     }
 }
