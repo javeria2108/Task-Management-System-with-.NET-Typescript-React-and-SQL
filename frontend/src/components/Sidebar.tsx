@@ -22,10 +22,10 @@ function Sidebar() {
     navigate('/layout')
   }
   const onProfileClick=()=>{
-    navigate('/profile')
+    navigate('profile')
   }
   const onTeamClick=()=>{
-    navigate('/team')
+    navigate('team')
   }
   return (
     <div className="flex flex-col px-5 py-10 text-white">
