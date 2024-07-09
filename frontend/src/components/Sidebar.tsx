@@ -21,9 +21,13 @@ function Sidebar() {
   const onDashboardClick=()=>{
     navigate('/layout')
   }
+  const onProfileClick=()=>{
+    navigate('/profile')
+  }
   return (
     <div className="flex flex-col px-5 py-10 text-white">
-      <div className="flex flex-row gap-2 px-2 py-4 hover:bg-pink focus:bg-pink rounded-lg hover:cursor-pointer ">
+      <div onClick={()=>onProfileClick()}
+       className="flex flex-row gap-2 px-2 py-4 hover:bg-pink focus:bg-pink rounded-lg hover:cursor-pointer ">
         <FontAwesomeIcon icon="user-circle" size="2x" />
         <p className="text-lg">My Profile</p>
       </div>
