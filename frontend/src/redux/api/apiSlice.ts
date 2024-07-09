@@ -39,4 +39,4 @@ export const apiSlice = createApi({
 }),
 });
 
-export const { useRegisterUserMutation, useLoginUserMutation, useFetchUserQuery,  useGetTasksByUsernameQuery} = apiSlice;
+export const { useRegisterUserMutation, useLoginUserMutation, useFetchUserQuery,  useGetTasksByUsernameQuery,useGetUserProfileQuery, useSetUserProfileMutation} = apiSlice;
