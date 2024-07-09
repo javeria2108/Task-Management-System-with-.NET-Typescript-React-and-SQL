@@ -4,12 +4,20 @@ export interface UserState {
   id: string | null,
   username: string | null;
   email: string | null;
+  profilePictureUrl: string | null;
+  contactInformation: string | null;
+  phoneNumber: string | null;
+  teamId: number | null;
 }
 
 const initialState: UserState = {
   id: null,
   username: null,
   email: null,
+  profilePictureUrl: null,
+  contactInformation: null,
+  phoneNumber: null,
+  teamId: null,
 };
 
 const userSlice = createSlice({
@@ -21,13 +29,22 @@ const userSlice = createSlice({
       state.username = action.payload.username;
       state.email = action.payload.email;
     },
+    setUserProfile:(state, action: PayloadAction<UserState>)=>{
+      state.profilePictureUrl=action.payload.profilePictureUrl;
+      state.phoneNumber=action.payload.phoneNumber;
+      state.teamId=action.payload.teamId
+    },
     clearUser: (state) => {
       state.id=null;
       state.username = null;
       state.email = null;
+      state.profilePictureUrl = null;
+      state.contactInformation = null;
+      state.phoneNumber = null;
+      state.teamId = null;
     },
   },
 });
 
-export const { setUser, clearUser } = userSlice.actions;
+export const { setUser, clearUser, setUserProfile } = userSlice.actions;
 export default userSlice.reducer;
