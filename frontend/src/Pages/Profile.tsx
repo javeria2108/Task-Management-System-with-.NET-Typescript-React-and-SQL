@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch,useAppSelector } from '../redux/hooks';
 import { RootState } from '../redux/store';
-import { useGetUserProfileQuery, useSetUserProfileMutation } from '../redux/api/apiSlice'
+import { useGetUserProfileQuery, useSetUserProfileMutation } from '../redux/api/userApi'
 import { UserProfileSchema } from '../Schemas/UserProfileSchema';
 import { setUserProfile } from '../redux/slices/UserSlice';
 
@@ -11,6 +11,7 @@ const Profile: React.FC = () => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector((state: RootState) => state.user.id);
   const username=useAppSelector((state: RootState)=>state.user.username)
+  console.log(userId)
   const email=useAppSelector((state: RootState)=>state.user.email)
   const { data: userProfile, error, isLoading } = useGetUserProfileQuery(userId || '');
   const [updateUserProfile]=useSetUserProfileMutation();

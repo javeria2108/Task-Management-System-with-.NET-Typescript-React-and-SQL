@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { variables } from "../constants";
 import { Link } from "react-router-dom";
-import { useLoginUserMutation } from '../redux/api/apiSlice';
+import { useLoginUserMutation } from '../redux/api/authApi'
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../redux/slices/AuthSlice';
 import { setUser } from '../redux/slices/UserSlice';
@@ -27,6 +27,7 @@ export function Login() {
       const response = await loginUser(data).unwrap();
       dispatch(setCredentials({ user:response.username, token: response.token, role:response.role}));
       dispatch(setUser({id: response.id, username: response.username, email: response.email }));
+      console.log('userID after login:', response.id)
       navigate('/layout')
       console.log('User logged in successfully', response);
     }catch (err) {

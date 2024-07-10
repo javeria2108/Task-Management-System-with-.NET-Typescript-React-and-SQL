@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
-import { useGetTasksByUsernameQuery } from '../redux/api/apiSlice';
-import { TaskDetailsDto, setTasks } from '../redux/slices/TasksSlice';
+import { useGetTasksByUsernameQuery } from '../redux/api/tasksApi'
+import {setTasks } from '../redux/slices/TasksSlice';
+import { TaskDetails } from '../redux/types/TaskState.type';
 import UserTasksCard from '../components/UserTasksCard';
 
 function Tasks() {
@@ -20,7 +21,7 @@ function Tasks() {
   return (
     <div>
         {
-            tasks?.map((task: TaskDetailsDto)=>{
+            tasks?.map((task: TaskDetails)=>{
                 return(
                     <div key={task.id}>
                    <UserTasksCard task={task}/>

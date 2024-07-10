@@ -2,7 +2,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/AuthSlice';
 import userReducer from './slices/UserSlice';
 import tasksReducer from './slices/TasksSlice'
-import { apiSlice } from './api/apiSlice';
+import { userApi } from './api/userApi';
+import { authApi } from './api/authApi';
+import { taskApi } from './api/tasksApi';
 
 const preloadedState = {
     auth: {
@@ -17,10 +19,12 @@ export const store = configureStore({
     auth: authReducer,
     user: userReducer,
     tasks: tasksReducer,
-    [apiSlice.reducerPath]: apiSlice.reducer,
+    [userApi.reducerPath]: userApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
+    [taskApi.reducerPath]: taskApi.reducer,
   },preloadedState,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware),
+    getDefaultMiddleware().concat(userApi.middleware, authApi.middleware, taskApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
