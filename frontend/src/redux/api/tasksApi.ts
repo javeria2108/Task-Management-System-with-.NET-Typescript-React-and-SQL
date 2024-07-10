@@ -18,7 +18,22 @@ export const taskApi = createApi({
             body: task
         })
     }),
+    updateTask: builder.mutation<TaskDetails, Partial<TaskDetails>>({
+        query: (task) => ({
+          url: `tasks/${task.id}`,
+          method: 'PUT',
+          body: task,
+        }),
+      }),
+      deleteTask: builder.mutation<void, number>({
+        query: (taskId) => ({
+          url: `tasks/${taskId}`,
+          method: 'DELETE',
+        }),
+      }),
   }),
 });
 
-export const { useGetTasksByUsernameQuery, useGetAllTasksQuery, useCreateTaskMutation } = taskApi;
+export const { useGetTasksByUsernameQuery, useGetAllTasksQuery, useCreateTaskMutation, 
+    useDeleteTaskMutation, useUpdateTaskMutation
+} = taskApi;

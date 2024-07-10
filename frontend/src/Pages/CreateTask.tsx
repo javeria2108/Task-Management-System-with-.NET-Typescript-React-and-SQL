@@ -41,79 +41,81 @@ export function CreateTaskForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col bg-lightGrey m-5"
+      className="flex flex-col bg-lightGrey m-5 p-6 rounded-lg"
     >
-      <h1 className="text-center text-2xl sm:text-3xl text-white">
-        Create Task
+      <h1 className="text-2xl sm:text-3xl text-white mb-6">
+        Create New Task
       </h1>
-      <div className="flex flex-row items-center">
-        <div className="flex flex-col">
-        <input
-          {...register("name")}
-          placeholder="Task Name"
-          className="p-2 border rounded-xl w-3/5 mt-5"
-        />
-        <span className="text-red-500">{errors && errors.name?.message}</span>
+      <div className="grid grid-cols-2 gap-4 w-4/5">
+        {/* Left Column */}
+        <div className="flex flex-col gap-2">
+          <input
+            {...register("name")}
+            placeholder="Task Name"
+            className="p-2 border rounded-xl w-full"
+          />
+          <span className="text-red-500">
+            {errors && errors.name?.message}
+          </span>
 
-        <textarea
-          {...register("description")}
-          placeholder="Description"
-          className="p-2 border rounded-xl w-3/5 mt-5"
-        />
-        <span className="text-red-500">
-          {errors && errors.description?.message}
-        </span>
+          <textarea
+            {...register("description")}
+            placeholder="Description"
+            className="p-2 border rounded-xl w-full"
+          />
+          <span className="text-red-500">
+            {errors && errors.description?.message}
+          </span>
 
-        <select
-          {...register("priority")}
-          className="p-2 border rounded-xl w-3/5 mt-5"
-        >
-          <option value="">Select Priority</option>
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select>
-        <span className="text-red-500">
-          {errors && errors.priority?.message}
-        </span>
+          <select
+            {...register("priority")}
+            className="p-2 border rounded-xl w-full"
+          >
+            <option value="">Select Priority</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+          <span className="text-red-500">
+            {errors && errors.priority?.message}
+          </span>
         </div>
-        <div className="flex flex-col">
-            
-        <input
-          {...register("category")}
-          placeholder="Category"
-          className="p-2 border rounded-xl w-3/5 mt-5"
-        />
-        <span className="text-red-500">
-          {errors && errors.category?.message}
-        </span>
 
-        <input
-          {...register("duedate", { valueAsDate: true })}
-          type="date"
-          placeholder="Due Date"
-          className="p-2 border rounded-xl w-3/5 mt-5"
-        />
-        <span className="text-red-500">
-          {errors && errors.duedate?.message}
-        </span>
+        {/* Right Column */}
+        <div className="flex flex-col gap-2">
+          <input
+            {...register("category")}
+            placeholder="Category"
+            className="p-2 border rounded-xl w-full"
+          />
+          <span className="text-red-500">
+            {errors && errors.category?.message}
+          </span>
 
-        <input
-          {...register("username")}
-          placeholder="Username"
-          className="p-2 border rounded-xl w-3/5 mt-5"
-        />
-        <span className="text-red-500">
-          {errors && errors.username?.message}
-        </span>
+          <input
+            {...register("duedate", { valueAsDate: true })}
+            type="date"
+            placeholder="Due Date"
+            className="p-2 border rounded-xl w-full"
+          />
+          <span className="text-red-500">
+            {errors && errors.duedate?.message}
+          </span>
+
+          <input
+            {...register("username")}
+            placeholder="Username"
+            className="p-2 border rounded-xl w-full"
+          />
+          <span className="text-red-500">
+            {errors && errors.username?.message}
+          </span>
         </div>
-        
-
       </div>
 
       <button
         type="submit"
-        className="mt-5 bg-green rounded-lg p-2 w-1/3 text-white"
+        className="mt-6 bg-green w-28 rounded-lg p-2  text-white hover:bg-green-600"
       >
         Create Task
       </button>

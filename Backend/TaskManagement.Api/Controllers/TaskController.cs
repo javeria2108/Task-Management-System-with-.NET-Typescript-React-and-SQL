@@ -66,7 +66,7 @@ namespace TaskManagement.Api.Controllers
         {
             var newTask = await _tasksRepo.CreateAsync(taskDto);
             if(newTask==null){
-                return NotFound();
+                return StatusCode(500, "user does not exist");
             }
             return CreatedAtAction(nameof(GetById), new { id = newTask.Id }, newTask.ToTaskDetailsDto());
 
