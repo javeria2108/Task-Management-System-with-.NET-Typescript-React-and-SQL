@@ -23,6 +23,9 @@ public class TaskRepository : ITasksRepository
     {
          var newTask = taskDto.ToEntity();
         newTask.User = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == taskDto.Username);
+        if (newTask.User ==null){
+            return null;
+        }
         newTask.Status = "pending";
         await _context.Task.AddAsync(newTask);
         await _context.SaveChangesAsync();

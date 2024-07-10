@@ -65,6 +65,9 @@ namespace TaskManagement.Api.Controllers
         public async Task<IActionResult> CreateTask([FromBody] CreateTaskDto taskDto)
         {
             var newTask = await _tasksRepo.CreateAsync(taskDto);
+            if(newTask==null){
+                return NotFound();
+            }
             return CreatedAtAction(nameof(GetById), new { id = newTask.Id }, newTask.ToTaskDetailsDto());
 
         }

@@ -17,6 +17,10 @@ const AdminTaskPage = () => {
 
   return (
     <>
+    <div>
+        <div className='m-6'>
+        <button className='bg-blue p-4 rounded-lg text-white'>Create New</button>
+        </div>
       <div>
         {
             tasks?.map((task: TaskDetails)=>{
@@ -27,6 +31,7 @@ const AdminTaskPage = () => {
                 )
             })
         }
+    </div>
     </div>
     </>
   )
