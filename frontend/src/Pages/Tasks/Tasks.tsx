@@ -7,7 +7,7 @@ const Tasks = () => {
   const role=useAppSelector((state)=>state.auth.role)
   return (
     <>
-    {role && role=='admin'? <AdminTaskPage></AdminTaskPage>
+    {role && role=='Admin'? <AdminTaskPage></AdminTaskPage>
     : <UserTasks></UserTasks>}
     </>
   )

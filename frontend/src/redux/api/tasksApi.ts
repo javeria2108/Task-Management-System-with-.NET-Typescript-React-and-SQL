@@ -8,7 +8,10 @@ export const taskApi = createApi({
     getTasksByUsername: builder.query<TaskDetails[], string>({
       query: (username) => `tasks/user/${username}`,
     }),
+    getAllTasks: builder.query<TaskDetails[], void>({
+        query: () => `tasks`,
+      }),
   }),
 });
 
-export const { useGetTasksByUsernameQuery } = taskApi;
+export const { useGetTasksByUsernameQuery, useGetAllTasksQuery } = taskApi;

@@ -144,7 +144,7 @@ namespace TaskManagement.Api.Controllers
                             ProfilePictureUrl = null,
                             ContactInformation = null,
                             PhoneNumber = null,
-                            TeamId = 0 // Set default or null value for TeamId
+                            TeamId = 1
                         };
                         await _userProfileRepository.AddUserProfileAsync(userProfile);
 
