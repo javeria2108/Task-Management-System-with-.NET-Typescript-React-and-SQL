@@ -1,11 +1,17 @@
 import React from "react";
 import { TaskDetails } from "../redux/types/TaskState.type";
+import { useDeleteTaskMutation } from "../redux/api/tasksApi";
+import { useAppDispatch } from "../redux/hooks";
+import { deleteTask } from "../redux/slices/TasksSlice";
 
 type TasksCardProps= {
   task: TaskDetails;
+  onDelete: (taskId: number) => void; 
 }
 
-const AdminTasksCard: React.FC<TasksCardProps> = ({ task }) => {
+
+const AdminTasksCard: React.FC<TasksCardProps> = ({ task,onDelete }) => {
+   
   return (
     <div
       className="flex flex-row bg-MediumGrey p-4 items-center w-2/3 h-20 rounded-lg m-2 text-white text-lg
@@ -18,6 +24,7 @@ const AdminTasksCard: React.FC<TasksCardProps> = ({ task }) => {
         </button>
         <button
           className="p-4 bg-orange text-yellow hover:cursor-pointer rounded-lg min-w-28 "
+        onClick={()=>onDelete(task.id)}
         >
           Delete
         </button>
