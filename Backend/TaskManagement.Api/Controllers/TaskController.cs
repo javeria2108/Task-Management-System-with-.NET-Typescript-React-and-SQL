@@ -33,7 +33,7 @@ namespace TaskManagement.Api.Controllers
         public async Task<IActionResult> GetAll()
         {
             var tasks = await _tasksRepo.GetAllAsync();
-            var taskDtos = tasks.Select(task => task.ToTaskSummaryDto());
+            var taskDtos = tasks.Select(task => task.ToTaskDetailsDto());
             return Ok(taskDtos);
         }
         [HttpGet("{id}")]
