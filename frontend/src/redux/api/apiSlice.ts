@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { TaskDetails } from '../types/TaskState.type';
 import { UserProfileSchema } from '../../Schemas/UserProfileSchema';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5068/api/' }),
+  baseQuery: fetchBaseQuery({ baseUrl:API_BASE_URL }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
       query: (user) => ({
