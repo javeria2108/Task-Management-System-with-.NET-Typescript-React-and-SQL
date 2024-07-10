@@ -7,6 +7,7 @@ import Profile from './Pages/Profile';
 import Tasks from './Pages/Tasks/Tasks';
 import Team from './Pages/Team';
 import Dashboard from './Pages/Dashboard';
+import { CreateTaskForm } from './Pages/CreateTask';
 
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
             <Route path='profile' element={<Profile />} />
             <Route path='tasks' element={<Tasks />} />
             <Route path='team' element={<Team/>} />
+            <Route path='tasks/create' element={<CreateTaskForm/>} />
+
         </Route>
     </Routes>
 </BrowserRouter>
