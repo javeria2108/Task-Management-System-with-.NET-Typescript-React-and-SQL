@@ -27,7 +27,7 @@ export const apiSlice = createApi({
         query: (username) => `tasks/user/${username}`,
       }),
       getUserProfile: builder.query<UserProfileSchema, string>({
-        query: (userId) => `profile/${userId}`,
+        query: (userId) => `profile/user/${userId}`,
       }),
       setUserProfile: builder.mutation<UserProfileSchema, Partial<UserProfileSchema> & { userId: string }>({
         query: ({ userId, ...patch }) => ({

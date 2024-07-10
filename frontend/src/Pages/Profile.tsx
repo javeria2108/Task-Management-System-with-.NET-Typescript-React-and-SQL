@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch,useAppSelector } from '../redux/hooks';
 import { RootState } from '../redux/store';
 import { useGetUserProfileQuery, useSetUserProfileMutation } from '../redux/api/apiSlice'
 import { UserProfileSchema } from '../Schemas/UserProfileSchema';
@@ -8,9 +8,10 @@ import { setUserProfile } from '../redux/slices/UserSlice';
 const defaultAvatar = '/path/to/default/avatar.png'; // Path to your default avatar image
 
 const Profile: React.FC = () => {
-  const dispatch = useDispatch();
-  const userId = useSelector((state: RootState) => state.user.id);
-  const username=useSelector((state: RootState)=>state.user.username)
+  const dispatch = useAppDispatch();
+  const userId = useAppSelector((state: RootState) => state.user.id);
+  const username=useAppSelector((state: RootState)=>state.user.username)
+  const email=useAppSelector((state: RootState)=>state.user.email)
   const { data: userProfile, error, isLoading } = useGetUserProfileQuery(userId || '');
   const [updateUserProfile]=useSetUserProfileMutation();
   const [selectedTeam, setSelectedTeam] = useState<number | null>(null);
@@ -63,8 +64,8 @@ const Profile: React.FC = () => {
         alt="Profile" 
         style={{ width: '150px', height: '150px', borderRadius: '50%' }} 
       />
-       <p>Name: {userProfile?.username}</p>
-      <p>Email: {userProfile?.email}</p>
+       <p>Name: {username}</p>
+      <p>Email: {email}</p>
       <p>Phone: {userProfile?.phoneNumber}</p>
       <div>
         <label htmlFor="team-select">Choose a team:</label>
