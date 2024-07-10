@@ -8,6 +8,7 @@ import Tasks from './Pages/Tasks/Tasks';
 import Team from './Pages/Team';
 import Dashboard from './Pages/Dashboard';
 import { CreateTaskForm } from './Pages/CreateTask';
+import './styles.css';
 
 function App() {
 

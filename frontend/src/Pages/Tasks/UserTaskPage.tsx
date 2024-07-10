@@ -16,8 +16,6 @@ function UserTasks() {
         }
       }, [tasks, dispatch]);
 
-      console.log(tasks)
-
   return (
     <div>
         {

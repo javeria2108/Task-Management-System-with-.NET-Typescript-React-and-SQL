@@ -13,15 +13,14 @@ const AdminTasksCard: React.FC<TasksCardProps> = ({ task }) => {
     >
       <p className="">{task.name}</p>
       <div className="flex flex-row gap-2">
-        <p className="p-2 bg-green rounded-lg h-14 min-w-28 text-center m-auto">
+        <button className="p-4 bg-green rounded-lg hover:cursor-pointer min-w-28">
           Edit
-        </p>
-        <p
-          className="p-2 bg-orange text-yellow rounded-lg
-            h-14 min-w-28 text-center m-auto"
+        </button>
+        <button
+          className="p-4 bg-orange text-yellow hover:cursor-pointer rounded-lg min-w-28 "
         >
           Delete
-        </p>
+        </button>
         <p className="p-2 bg-lightPurple text-lightPink rounded-lg
             h-14 min-w-28 text-center m-auto">{task.status}</p>
       </div>
