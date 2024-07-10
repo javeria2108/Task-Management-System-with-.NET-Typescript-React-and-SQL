@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserSchema, userSchema } from "../Users/types/UserSchema";
+import { UserSchema, userSchema } from "../Schemas/UserSchema";
 import { Link } from "react-router-dom";
 import { useRegisterUserMutation } from "../redux/api/apiSlice";
 import { useDispatch } from "react-redux";

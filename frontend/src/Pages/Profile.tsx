@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import { useGetUserProfileQuery, useSetUserProfileMutation } from '../redux/api/apiSlice'
-import { UserProfileSchema } from '../Users/types/UserProfileSchema';
+import { UserProfileSchema } from '../Schemas/UserProfileSchema';
 import { setUserProfile } from '../redux/slices/UserSlice';
 
 const defaultAvatar = '/path/to/default/avatar.png'; // Path to your default avatar image

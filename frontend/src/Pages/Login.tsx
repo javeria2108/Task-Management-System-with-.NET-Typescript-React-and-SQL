@@ -6,7 +6,7 @@ import { useLoginUserMutation } from '../redux/api/apiSlice';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../redux/slices/AuthSlice';
 import { setUser } from '../redux/slices/UserSlice';
-import { LoginSchema, loginSchema } from "../Users/types/UserSchema";
+import { LoginSchema, loginSchema } from "../Schemas/UserSchema";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAppSelector } from "../redux/hooks";

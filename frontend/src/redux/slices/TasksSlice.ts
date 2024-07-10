@@ -1,18 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export interface TaskDetailsDto {
-    id: number;
-    name: string;
-    description: string;
-    priority: string;
-    category: string;
-    duedate: Date;
-    status: string;
-  }
-
-export interface TasksState {
-  tasks: TaskDetailsDto[];
-}
+import { TasksState, TaskDetails } from '../types/TaskState.type';
 
 const initialState: TasksState = {
   tasks: [],
@@ -22,13 +9,13 @@ const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    setTasks: (state, action: PayloadAction<TaskDetailsDto[]>) => {
+    setTasks: (state, action: PayloadAction<TaskDetails[]>) => {
       state.tasks = action.payload;
     },
-    addTask: (state, action: PayloadAction<TaskDetailsDto>) => {
+    addTask: (state, action: PayloadAction<TaskDetails>) => {
       state.tasks.push(action.payload);
     },
-    updateTask: (state, action: PayloadAction<TaskDetailsDto>) => {
+    updateTask: (state, action: PayloadAction<TaskDetails>) => {
       const index = state.tasks.findIndex(task => task.id === action.payload.id);
       if (index !== -1) {
         state.tasks[index] = action.payload;

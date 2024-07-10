@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export interface AuthState {
-  user: string | null;
-  token: string | null;
-  role: string | null;
-}
+import { AuthState } from '../types/AuthState.type';
 
 const initialState: AuthState = {
   user: null,

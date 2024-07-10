@@ -1,14 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export interface UserState {
-  id: string | null,
-  username: string | null;
-  email: string | null;
-  profilePictureUrl: string | null;
-  contactInformation: string | null;
-  phoneNumber: string | null;
-  teamId: number | null;
-}
+import { UserState } from '../types/UserState.type';
 
 const initialState: UserState = {
   id: null,

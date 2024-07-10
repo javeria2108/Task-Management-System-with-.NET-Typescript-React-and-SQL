@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { TaskDetailsDto } from '../slices/TasksSlice';
-import { UserProfileSchema } from '../../Users/types/UserProfileSchema';
+import { TaskDetails } from '../types/TaskState.type';
+import { UserProfileSchema } from '../../Schemas/UserProfileSchema';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -23,7 +23,7 @@ export const apiSlice = createApi({
     fetchUser: builder.query({
       query: () => 'account/me',
     }),
-    getTasksByUsername: builder.query<TaskDetailsDto[], string>({
+    getTasksByUsername: builder.query<TaskDetails[], string>({
         query: (username) => `tasks/user/${username}`,
       }),
       getUserProfile: builder.query<UserProfileSchema, string>({

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { patterns } from "../../constants";
+import { patterns } from "../constants";
 
 export const UserSchema = z.object({
   username: z.string().min(1, { message: "please type a username" }),
