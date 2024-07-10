@@ -2,11 +2,9 @@ import './index.css';
 import {Register} from "./Pages/Register"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login } from './Pages/Login';
-import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
-import UserDashboard from './Pages/UserDashboard/UserDashboard';
 import Layout from './layout';
 import Profile from './Pages/Profile';
-import Tasks from './Pages/Tasks';
+import Tasks from './Pages/Tasks/Tasks';
 import Team from './Pages/Team';
 import Dashboard from './Pages/Dashboard';
 

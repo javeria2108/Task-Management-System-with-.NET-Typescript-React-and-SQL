@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserState } from '../types/UserState.type';
 
 const initialState: UserState = {
-  id: null,
+  id: localStorage.getItem('userId'),
   username: null,
   email: null,
   profilePictureUrl: null,
@@ -19,6 +19,7 @@ const userSlice = createSlice({
       state.id=action.payload.id;
       state.username = action.payload.username;
       state.email = action.payload.email;
+      localStorage.setItem('userId', action.payload.id)
     },
     setUserProfile:(state, action: PayloadAction<UserState>)=>{
       state.profilePictureUrl=action.payload.profilePictureUrl;
@@ -33,6 +34,7 @@ const userSlice = createSlice({
       state.contactInformation = null;
       state.phoneNumber = null;
       state.teamId = null;
+      localStorage.removeItem('userId');
     },
   },
 });

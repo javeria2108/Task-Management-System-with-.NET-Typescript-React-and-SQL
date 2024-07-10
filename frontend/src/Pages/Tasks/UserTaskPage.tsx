@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../redux/hooks'
-import { useGetTasksByUsernameQuery } from '../redux/api/tasksApi'
-import {setTasks } from '../redux/slices/TasksSlice';
-import { TaskDetails } from '../redux/types/TaskState.type';
-import UserTasksCard from '../components/UserTasksCard';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { useGetTasksByUsernameQuery } from '../../redux/api/tasksApi'
+import {setTasks } from '../../redux/slices/TasksSlice';
+import { TaskDetails } from '../../redux/types/TaskState.type';
+import UserTasksCard from '../../components/UserTasksCard';
 
-function Tasks() {
+function UserTasks() {
     const currentUser=useAppSelector((state)=>state.auth.user);
     console.log(currentUser)
     const dispatch=useAppDispatch();
@@ -33,4 +33,4 @@ function Tasks() {
   )
 }
 
-export default Tasks
+export default UserTasks

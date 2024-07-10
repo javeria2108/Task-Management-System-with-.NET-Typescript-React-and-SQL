@@ -11,7 +11,7 @@ const preloadedState = {
       token: localStorage.getItem('token'),
       user: localStorage.getItem('user'),
       role: localStorage.getItem('role'),
-    },
+    }
   };
 
 export const store = configureStore({
