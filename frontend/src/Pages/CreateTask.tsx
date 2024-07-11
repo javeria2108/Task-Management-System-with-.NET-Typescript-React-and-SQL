@@ -5,6 +5,7 @@ import { TaskSchema, taskSchema } from "../Schemas/TaskSchema";
 import { useCreateTaskMutation } from "../redux/api/tasksApi";
 import { useDispatch } from "react-redux";
 import { addTask } from "../redux/slices/TasksSlice";
+import { useNavigate } from "react-router-dom";
 
 export function CreateTaskForm() {
   const {
@@ -18,6 +19,7 @@ export function CreateTaskForm() {
 
   const [createTask] = useCreateTaskMutation();
   const dispatch = useDispatch();
+  const navigate=useNavigate();
 
   const [apiErrors, setApiErrors] = useState<
     { code: string; description: string }[]
@@ -28,6 +30,8 @@ export function CreateTaskForm() {
       const task = await createTask(data).unwrap();
       dispatch(addTask(task));
       console.log("Task created successfully: ", task);
+      navigate('/layout/tasks')
+    
     } catch (err) {
       if (err && typeof err === "object" && "data" in err) {
         console.error("Failed to create task: ", (err as { data: any }).data);
@@ -116,6 +120,7 @@ export function CreateTaskForm() {
       <button
         type="submit"
         className="mt-6 bg-green w-28 rounded-lg p-2  text-white hover:bg-green-600"
+    
       >
         Create Task
       </button>
