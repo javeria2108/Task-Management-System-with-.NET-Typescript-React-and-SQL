@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { variables } from "../constants";
 import { Link } from "react-router-dom";
 import { useLoginUserMutation } from '../redux/api/authApi'
 import { useDispatch } from 'react-redux';

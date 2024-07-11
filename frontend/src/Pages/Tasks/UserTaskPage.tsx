@@ -5,7 +5,7 @@ import {setTasks } from '../../redux/slices/TasksSlice';
 import { TaskDetails } from '../../redux/types/TaskState.type';
 import UserTasksCard from '../../components/UserTasksCard';
 
-function UserTasks() {
+const UserTasks: React.FC=()=> {
     const currentUser=useAppSelector((state)=>state.auth.user);
     console.log(currentUser)
     const dispatch=useAppDispatch();

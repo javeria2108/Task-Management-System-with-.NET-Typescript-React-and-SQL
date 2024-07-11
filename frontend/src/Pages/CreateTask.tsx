@@ -19,11 +19,9 @@ export function CreateTaskForm() {
 
   const [createTask] = useCreateTaskMutation();
   const dispatch = useDispatch();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-  const [apiErrors, setApiErrors] = useState<
-    { code: string; description: string }[]
-  >([]);
+  const [apiError, setApiError] = useState<string>("");
 
   const onSubmit = async (data: taskSchema) => {
     try {
@@ -31,13 +29,11 @@ export function CreateTaskForm() {
       dispatch(addTask(task));
       console.log("Task created successfully: ", task);
       navigate('/layout/tasks')
-    
     } catch (err) {
       if (err && typeof err === "object" && "data" in err) {
-        console.error("Failed to create task: ", (err as { data: any }).data);
-        setApiErrors(
-          (err as { data: { code: string; description: string }[] }).data
-        );
+        console.error("Failed to create task: ", err);
+        const errorData = (err as { data: string }).data;
+        setApiError(errorData);
       }
     }
   };
@@ -87,11 +83,16 @@ export function CreateTaskForm() {
 
         {/* Right Column */}
         <div className="flex flex-col gap-2">
-          <input
+          <select
             {...register("category")}
-            placeholder="Category"
             className="p-2 border rounded-xl w-full"
-          />
+          >
+            <option value="">Select Category</option>
+            <option value="Development">Development</option>
+            <option value="Design">Design</option>
+            <option value="Testing">Testing</option>
+            <option value="Management">Management</option>
+          </select>
           <span className="text-red-500">
             {errors && errors.category?.message}
           </span>
@@ -119,16 +120,13 @@ export function CreateTaskForm() {
 
       <button
         type="submit"
-        className="mt-6 bg-green w-28 rounded-lg p-2  text-white hover:bg-green-600"
-    
+        className="mt-6 bg-green w-28 rounded-lg p-2 text-white hover:bg-green-600"
       >
         Create Task
       </button>
-      {apiErrors && apiErrors.length > 0 && (
+      {apiError && (
         <div className="text-red-500 p-2">
-          {apiErrors.map((error, index) => (
-            <p key={index}>{error.description}</p>
-          ))}
+         <p>Error: {apiError}</p>
         </div>
       )}
     </form>

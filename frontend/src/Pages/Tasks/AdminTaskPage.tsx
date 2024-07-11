@@ -6,7 +6,7 @@ import { TaskDetails } from "../../redux/types/TaskState.type";
 import AdminTasksCard from "../../components/AdminTasksCard";
 import { useNavigate } from "react-router-dom";
 
-const AdminTaskPage = () => {
+const AdminTaskPage: React.FC=() => {
   const { data: tasksData, error, isLoading } = useGetAllTasksQuery();
   const [tasks, setTasksLocal] = useState<TaskDetails[]>([]);
   const dispatch = useAppDispatch();
