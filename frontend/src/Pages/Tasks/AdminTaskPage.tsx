@@ -48,7 +48,7 @@ const AdminTaskPage: React.FC=() => {
       <div className="flex-grow overflow-y-auto">
         {tasks.map((task: TaskDetails) => (
           <div key={task.id} className="mb-4">
-            <AdminTasksCard task={task} onDelete={handleDelete} />
+            <AdminTasksCard task={task} onDelete={handleDelete}/>
           </div>
         ))}
       </div>

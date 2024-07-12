@@ -4,13 +4,15 @@ import { useDeleteTaskMutation } from "../redux/api/tasksApi";
 import { useAppDispatch } from "../redux/hooks";
 import { deleteTask } from "../redux/slices/TasksSlice";
 
+
 type TasksCardProps= {
   task: TaskDetails;
   onDelete: (taskId: number) => void; 
+  onEdit: (taskId: number) => void; 
 }
 
 
-const AdminTasksCard: React.FC<TasksCardProps> = ({ task,onDelete }) => {
+const AdminTasksCard: React.FC<TasksCardProps> = ({ task,onDelete, onEdit }) => {
    
   return (
     <div
@@ -19,7 +21,8 @@ const AdminTasksCard: React.FC<TasksCardProps> = ({ task,onDelete }) => {
     >
       <p className="">{task.name}</p>
       <div className="flex flex-row gap-2">
-        <button className="p-4 bg-green rounded-lg hover:cursor-pointer min-w-28">
+        <button className="p-4 bg-green rounded-lg hover:cursor-pointer min-w-28"
+        onClick={()=>onEdit(task.id)}>
           Edit
         </button>
         <button
