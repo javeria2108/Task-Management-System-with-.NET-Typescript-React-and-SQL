@@ -1,10 +1,14 @@
+import { useParams } from "react-router-dom";
 
 
-const TaskDetails: React.FC=() => {
+const AdminTaskDetails: React.FC=() => {
+   const {id}=useParams();
+   
  return(
     <>
+    AdminTaskDetails
     </>
  )
 };
 
-export default TaskDetails;
+export default AdminTaskDetails;

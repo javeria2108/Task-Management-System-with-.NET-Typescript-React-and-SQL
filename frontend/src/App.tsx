@@ -9,6 +9,7 @@ import Team from './Pages/Team';
 import Dashboard from './Pages/Dashboard';
 import { CreateTaskForm } from './Pages/CreateTask';
 import './styles.css';
+import AdminTaskDetails from './Pages/TaskDetails';
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
             <Route path='tasks' element={<Tasks />} />
             <Route path='team' element={<Team/>} />
             <Route path='tasks/create' element={<CreateTaskForm/>} />
-            <Route path='tasks/taskdetail/:id' element={<CreateTaskForm/>} />
+            <Route path='tasks/taskdetail/:id' element={<AdminTaskDetails/>} />
 
         </Route>
     </Routes>

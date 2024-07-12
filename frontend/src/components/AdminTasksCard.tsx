@@ -3,16 +3,24 @@ import { TaskDetails } from "../redux/types/TaskState.type";
 import { useDeleteTaskMutation } from "../redux/api/tasksApi";
 import { useAppDispatch } from "../redux/hooks";
 import { deleteTask } from "../redux/slices/TasksSlice";
+import { useNavigate } from "react-router-dom";
 
 
 type TasksCardProps= {
   task: TaskDetails;
   onDelete: (taskId: number) => void; 
-  onEdit: (taskId: number) => void; 
 }
 
 
-const AdminTasksCard: React.FC<TasksCardProps> = ({ task,onDelete, onEdit }) => {
+
+const AdminTasksCard: React.FC<TasksCardProps> = ({ task,onDelete }) => {
+
+  const navigate=useNavigate();
+  const onEdit=(id: number)=>{
+    navigate(`taskdetail/${id}`)
+  }
+  
+
    
   return (
     <div
