@@ -37,7 +37,8 @@ public static class TaskMappings
             Priority = taskModel.Priority,
             Category = taskModel.Category,
             Duedate = taskModel.Duedate,
-            Status = taskModel.Status
+            Status = taskModel.Status,
+            Username=taskModel.User.UserName
         };
     }
 }

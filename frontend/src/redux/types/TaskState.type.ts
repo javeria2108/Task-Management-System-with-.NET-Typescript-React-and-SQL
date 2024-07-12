@@ -6,6 +6,7 @@ export type TaskDetails= {
     category: string;
     duedate: Date;
     status: string;
+    username: string
   }
 
 export type TasksState= {

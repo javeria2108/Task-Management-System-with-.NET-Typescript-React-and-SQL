@@ -44,7 +44,7 @@ namespace TaskManagement.Api.Controllers
             {
                 return NotFound();
             }
-            return Ok(task.ToTaskSummaryDto());
+            return Ok(task.ToTaskDetailsDto());
         }
         [HttpGet("user/{username}")]
         public async Task<IActionResult> GetAllByUserId([FromRoute] string username)

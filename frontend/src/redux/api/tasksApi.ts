@@ -8,6 +8,9 @@ export const taskApi = createApi({
     getTasksByUsername: builder.query<TaskDetails[], string>({
       query: (username) => `tasks/user/${username}`,
     }),
+    getTaskById: builder.query<TaskDetails, number>({
+      query: (id) => `tasks/${id}`,
+    }),
     getAllTasks: builder.query<TaskDetails[], void>({
         query: () => `tasks`,
       }),
@@ -35,5 +38,5 @@ export const taskApi = createApi({
 });
 
 export const { useGetTasksByUsernameQuery, useGetAllTasksQuery, useCreateTaskMutation, 
-    useDeleteTaskMutation, useUpdateTaskMutation
+    useDeleteTaskMutation, useUpdateTaskMutation, useGetTaskByIdQuery
 } = taskApi;
