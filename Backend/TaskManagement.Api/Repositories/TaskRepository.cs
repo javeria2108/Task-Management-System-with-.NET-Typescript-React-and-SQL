@@ -51,7 +51,9 @@ public class TaskRepository : ITasksRepository
 
     public async Task<TaskModel?> GetByIdAsync(int id)
     {
-        return await _context.Task.FindAsync(id);
+         return await _context.Task
+        .Include(t => t.User) // Include the User property
+        .FirstOrDefaultAsync(t => t.Id == id);
     }
 
     public async Task<List<TaskModel>> GetTasksByUserAsync(string username)

@@ -37,6 +37,18 @@ public static class TaskMappings
             Priority = taskModel.Priority,
             Category = taskModel.Category,
             Duedate = taskModel.Duedate,
+            Status = taskModel.Status
+        };
+    }
+     public static TaskDetailsDtoWithUsername ToTaskDetailsDtoWithUsername(this TaskModel taskModel)
+    {
+        return new TaskDetailsDtoWithUsername{
+            Id = taskModel.Id,
+            Name = taskModel.Name,
+            Description = taskModel.Description,
+            Priority = taskModel.Priority,
+            Category = taskModel.Category,
+            Duedate = taskModel.Duedate,
             Status = taskModel.Status,
             Username=taskModel.User.UserName
         };

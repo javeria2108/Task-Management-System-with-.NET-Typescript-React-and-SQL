@@ -10,4 +10,5 @@ public class UpdateTaskDto
   [Required] public string? Category{get;set;}
   [Required] public DateTime Duedate{get;set;} 
    public string Status{get;set;}
+    public string Username { get; set; }
 }
