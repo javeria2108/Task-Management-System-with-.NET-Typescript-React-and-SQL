@@ -6,7 +6,7 @@ import { TaskDetails } from "../../redux/types/TaskState.type";
 import AdminTasksCard from "../../components/AdminTasksCard";
 import { useNavigate } from "react-router-dom";
 
-const AdminTaskPage: React.FC=() => {
+const AdminTaskPage: React.FC = () => {
   const { data: tasksData, error, isLoading } = useGetAllTasksQuery();
   const [tasks, setTasksLocal] = useState<TaskDetails[]>([]);
   const dispatch = useAppDispatch();
@@ -16,16 +16,19 @@ const AdminTaskPage: React.FC=() => {
 
   useEffect(() => {
     if (tasksData) {
+      const filteredTasks = applyCategoryFilter(tasksData, selectedCategory);
+      setTasksLocal(filteredTasks);
       dispatch(setTasks(tasksData));
-      if (selectedCategory === "All") {
-        setTasksLocal(tasks);
-      } else {
-        const filtered = tasks.filter(task => task.category === selectedCategory);
-        setTasksLocal(filtered);
-      }
     }
-   
-  }, [tasksData, dispatch]);
+  }, [tasksData, selectedCategory, dispatch]);
+
+  const applyCategoryFilter = (tasks: TaskDetails[], category: string): TaskDetails[] => {
+    if (category === "All") {
+      return tasks;
+    } else {
+      return tasks.filter(task => task.category === category);
+    }
+  };
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(event.target.value);
@@ -45,6 +48,9 @@ const AdminTaskPage: React.FC=() => {
   const handleCreateTaskClick = () => {
     navigate("create");
   };
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading tasks</div>;
 
   return (
     <div className="h-5/6 flex flex-col">
@@ -69,7 +75,7 @@ const AdminTaskPage: React.FC=() => {
       <div className="flex-grow overflow-y-auto">
         {tasks.map((task: TaskDetails) => (
           <div key={task.id} className="mb-4">
-            <AdminTasksCard task={task} onDelete={handleDelete}/>
+            <AdminTasksCard task={task} onDelete={handleDelete} />
           </div>
         ))}
       </div>
