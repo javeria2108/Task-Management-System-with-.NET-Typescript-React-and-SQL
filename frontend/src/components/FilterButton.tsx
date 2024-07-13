@@ -23,7 +23,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({ tasks, category, onDelete }
   return (
     <div>
       <button onClick={handleFilter} className="bg-blue p-4 rounded-lg text-white hover:cursor-pointer hover:bg-MediumGrey">
-        Filter by {category}
+        Filter: {category}
       </button>
       <div className="flex-grow overflow-y-auto">
         {filteredTasks.map((task: TaskDetails) => (

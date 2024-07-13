@@ -12,13 +12,24 @@ const AdminTaskPage: React.FC=() => {
   const dispatch = useAppDispatch();
   const [deleteTaskQuery] = useDeleteTaskMutation();
   const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   useEffect(() => {
     if (tasksData) {
-      setTasksLocal(tasksData);
-      dispatch(setTasks(tasksData)); // Dispatch tasksData to Redux
+      dispatch(setTasks(tasksData));
+      if (selectedCategory === "All") {
+        setTasksLocal(tasks);
+      } else {
+        const filtered = tasks.filter(task => task.category === selectedCategory);
+        setTasksLocal(filtered);
+      }
     }
+   
   }, [tasksData, dispatch]);
+
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategory(event.target.value);
+  };
 
   const handleDelete = async (taskId: number) => {
     try {
@@ -37,13 +48,23 @@ const AdminTaskPage: React.FC=() => {
 
   return (
     <div className="h-5/6 flex flex-col">
-      <div className="m-6">
+      <div className="m-6 flex justify-between w-3/4">
         <button
           onClick={handleCreateTaskClick}
           className="bg-blue p-4 rounded-lg text-white hover:cursor-pointer hover:bg-MediumGrey"
         >
           Create New
         </button>
+        <div>
+          <label className="mr-2">Filter by Category:</label>
+          <select value={selectedCategory} onChange={handleCategoryChange} className="p-2 border rounded-lg">
+            <option value="All">All</option>
+            <option value="Development">Development</option>
+            <option value="Design">Design</option>
+            <option value="Testing">Testing</option>
+            <option value="Management">Management</option>
+          </select>
+        </div>
       </div>
       <div className="flex-grow overflow-y-auto">
         {tasks.map((task: TaskDetails) => (
