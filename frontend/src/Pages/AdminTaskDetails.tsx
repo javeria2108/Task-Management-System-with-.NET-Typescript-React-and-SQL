@@ -1,20 +1,24 @@
 import { useParams } from "react-router-dom";
 import { useGetTaskByIdQuery, useUpdateTaskMutation } from "../redux/api/tasksApi";
 import { useForm } from "react-hook-form";
-import { TaskSchema, taskSchema } from "../Schemas/TaskSchema";
+import { TaskDetailsSchema} from "../Schemas/TaskSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { EditableFields } from "../constants";
 import { TaskDetails } from "../redux/types/TaskState.type";
-import { format } from 'date-fns'
+import { format } from 'date-fns';
+import { useAppDispatch } from "../redux/hooks";
+import { editTask } from "../redux/slices/TasksSlice";
 
 const AdminTaskDetails: React.FC = () => {
   const { id } = useParams();
-  const { data: task, error, isLoading } = useGetTaskByIdQuery(parseInt(id as string))
+  const dispatch=useAppDispatch();
+    const { data: taskData, error, isLoading } = useGetTaskByIdQuery(parseInt(id as string));
+    const [task, setTask]=useState<TaskDetails>()
   const [updateTask] = useUpdateTaskMutation();
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm<taskSchema>({
-    resolver: zodResolver(TaskSchema)
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<TaskDetails>({
+    resolver: zodResolver(TaskDetailsSchema)
   });
   const [isEditable, setIsEditable] = useState({
     name: false,
@@ -23,29 +27,27 @@ const AdminTaskDetails: React.FC = () => {
     category: false,
     duedate: false,
     username: false,
+    status: false,
   });
 
   useEffect(() => {
+    setTask(taskData)
     if (task) {
       setValue("name", task.name);
       setValue("description", task.description);
       setValue("priority", task.priority);
       setValue("category", task.category);
-      setValue("duedate", format(new Date(task.duedate), 'yyyy-MM-dd')); // format to 'yyyy-MM-dd'
+      setValue("duedate", format(new Date(task.duedate), 'yyyy-MM-dd') as unknown as Date); // format to 'yyyy-MM-dd'
       setValue("username", task.username);
+      setValue("status", task.status);
     }
   }, [task, setValue]);
 
-  const onSubmit = async (data: taskSchema) => {
+  const onSubmit = async (data: TaskDetails) => {
     try {
-      // Ensure duedate is in 'yyyy-MM-dd' format
-      const formattedData: Partial<TaskDetails> = {
-        ...data,
-        duedate: format(new Date(data.duedate), 'yyyy-MM-dd') as unknown as Date // convert string to Date
-      };
-
-      console.log("Submitting data: ", formattedData); // Debug log
-      await updateTask({ id: task!.id, ...formattedData }).unwrap();
+      console.log(data); // Debug log
+      await updateTask({ ...data, id: task!.id }).unwrap();
+      setTask({ ...data, id: task!.id })
       console.log("Task updated successfully");
     } catch (err) {
       console.error("Failed to update task:", err);
@@ -124,10 +126,8 @@ const AdminTaskDetails: React.FC = () => {
               {...register("duedate", { valueAsDate: true })}
               type="date"
               placeholder="Due Date"
-              className={`p-2 border rounded-xl w-full ${isEditable.duedate ? "bg-blue-100" : "bg-grey-100"}`}
-              readOnly={!isEditable.duedate}
+              className="p-2 border rounded-xl w-full"
             />
-            <FontAwesomeIcon icon="edit" className="absolute top-2 right-2 cursor-pointer" onClick={() => handleEditClick("duedate")} />
           </div>
           <span className="text-red-500">{errors.duedate?.message}</span>
 
@@ -141,6 +141,17 @@ const AdminTaskDetails: React.FC = () => {
             <FontAwesomeIcon icon="edit" className="absolute top-2 right-2 cursor-pointer" onClick={() => handleEditClick("username")} />
           </div>
           <span className="text-red-500">{errors.username?.message}</span>
+
+          <div className="relative">
+            <input
+              {...register("status")}
+              placeholder="Status"
+              className={`p-2 border rounded-xl w-full ${isEditable.status ? "bg-blue-100" : "bg-grey-100"}`}
+              readOnly={!isEditable.status}
+            />
+            <FontAwesomeIcon icon="edit" className="absolute top-2 right-2 cursor-pointer" onClick={() => handleEditClick("status")} />
+          </div>
+          <span className="text-red-500">{errors.status?.message}</span>
         </div>
       </div>
 
