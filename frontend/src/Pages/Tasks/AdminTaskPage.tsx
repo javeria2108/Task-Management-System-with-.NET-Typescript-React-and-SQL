@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useGetAllTasksQuery, useDeleteTaskMutation } from "../../redux/api/tasksApi";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setTasks, deleteTask } from "../../redux/slices/TasksSlice";
+import { setTasks, deleteTask, addTask } from "../../redux/slices/TasksSlice";
 import { TaskDetails } from "../../redux/types/TaskState.type";
 import AdminTasksCard from "../../components/AdminTasksCard";
 import { useNavigate } from "react-router-dom";
+import { useApplyCategoryFilter } from "../../hooks/Filter"; // Assuming this hook filters tasks
 
 const AdminTaskPage: React.FC = () => {
   const { data: tasksData, error, isLoading } = useGetAllTasksQuery();
@@ -16,19 +17,20 @@ const AdminTaskPage: React.FC = () => {
 
   useEffect(() => {
     if (tasksData) {
-      const filteredTasks = applyCategoryFilter(tasksData, selectedCategory);
+      const filteredTasks = useApplyCategoryFilter(tasksData, selectedCategory);
       setTasksLocal(filteredTasks);
-      dispatch(setTasks(tasksData));
+      dispatch(setTasks(tasksData)); // Update Redux state with all tasks
     }
   }, [tasksData, selectedCategory, dispatch]);
 
-  const applyCategoryFilter = (tasks: TaskDetails[], category: string): TaskDetails[] => {
-    if (category === "All") {
-      return tasks;
-    } else {
-      return tasks.filter(task => task.category === category);
+  // Listen for changes in the Redux state to update local tasks list
+  useEffect(() => {
+    if (tasksData) {
+      const filteredTasks = useApplyCategoryFilter(tasksData, selectedCategory);
+      setTasksLocal(filteredTasks);
     }
-  };
+  }, [tasksData, selectedCategory]);
+
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(event.target.value);
@@ -46,7 +48,13 @@ const AdminTaskPage: React.FC = () => {
   };
 
   const handleCreateTaskClick = () => {
-    navigate("create");
+    navigate("create"); // Navigate to create task page
+  };
+
+  // Handle new task creation from CreateTaskForm
+  const handleTaskCreated = (newTask: TaskDetails) => {
+    dispatch(addTask(newTask)); // Add new task to Redux state
+    setTasksLocal(prevTasks => [...prevTasks, newTask]); // Update local state
   };
 
   if (isLoading) return <div>Loading...</div>;
