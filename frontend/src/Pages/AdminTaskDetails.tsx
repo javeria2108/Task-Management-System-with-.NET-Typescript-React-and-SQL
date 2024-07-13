@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useGetTaskByIdQuery, useUpdateTaskMutation } from "../redux/api/tasksApi";
 import { useForm } from "react-hook-form";
-import { TaskDetailsSchema} from "../Schemas/TaskSchema";
+import { TaskDetailsSchema } from "../Schemas/TaskSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,9 +13,10 @@ import { editTask } from "../redux/slices/TasksSlice";
 
 const AdminTaskDetails: React.FC = () => {
   const { id } = useParams();
-  const dispatch=useAppDispatch();
-    const { data: taskData, error, isLoading } = useGetTaskByIdQuery(parseInt(id as string));
-    const [task, setTask]=useState<TaskDetails>()
+  const dispatch = useAppDispatch();
+  const { data: taskData, error, isLoading } = useGetTaskByIdQuery(parseInt(id as string));
+  const [task, setTask] = useState<TaskDetails>();
+
   const [updateTask] = useUpdateTaskMutation();
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<TaskDetails>({
     resolver: zodResolver(TaskDetailsSchema)
@@ -30,24 +31,26 @@ const AdminTaskDetails: React.FC = () => {
     status: false,
   });
 
+  // Update local task state when taskData changes
   useEffect(() => {
-    setTask(taskData)
-    if (task) {
-      setValue("name", task.name);
-      setValue("description", task.description);
-      setValue("priority", task.priority);
-      setValue("category", task.category);
-      setValue("duedate", format(new Date(task.duedate), 'yyyy-MM-dd') as unknown as Date); // format to 'yyyy-MM-dd'
-      setValue("username", task.username);
-      setValue("status", task.status);
+    if (taskData) {
+      setTask(taskData);
+      setValue("name", taskData.name);
+      setValue("description", taskData.description);
+      setValue("priority", taskData.priority);
+      setValue("category", taskData.category);
+      setValue("duedate", format(new Date(taskData.duedate), 'yyyy-MM-dd') as unknown as Date); // format to 'yyyy-MM-dd'
+      setValue("username", taskData.username);
+      setValue("status", taskData.status);
     }
-  }, [task, setValue]);
+  }, [taskData, setValue]);
 
   const onSubmit = async (data: TaskDetails) => {
     try {
       console.log(data); // Debug log
-      await updateTask({ ...data, id: task!.id }).unwrap();
-      setTask({ ...data, id: task!.id })
+      const updatedTask = await updateTask({ ...data, id: task!.id }).unwrap();
+      setTask(updatedTask); // Update local task state
+      dispatch(editTask(updatedTask)); // Dispatch Redux action if necessary
       console.log("Task updated successfully");
     } catch (err) {
       console.error("Failed to update task:", err);
