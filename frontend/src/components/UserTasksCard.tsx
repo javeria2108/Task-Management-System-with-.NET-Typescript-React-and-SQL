@@ -9,7 +9,7 @@ const UserTasksCard: React.FC<UserTasksCardProps> = ({ task }) => {
   return (
     <div
       className="flex flex-row bg-MediumGrey p-4 items-center w-2/3 h-20 rounded-lg m-2 text-white text-lg
-    justify-between"
+    justify-between hover:cursor-pointer"
     >
       <p className="">{task.name}</p>
       <div className="flex flex-row gap-2">

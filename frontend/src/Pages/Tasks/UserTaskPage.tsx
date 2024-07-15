@@ -5,6 +5,7 @@ import {setTasks } from '../../redux/slices/TasksSlice';
 import { TaskDetails } from '../../redux/types/TaskState.type';
 import UserTasksCard from '../../components/UserTasksCard';
 import { useApplyCategoryFilter } from '../../hooks/Filter';
+import { useNavigate } from 'react-router-dom';
 
 const UserTasks: React.FC=()=> {
     const currentUser=useAppSelector((state)=>state.auth.user);
@@ -12,6 +13,7 @@ const UserTasks: React.FC=()=> {
     const dispatch=useAppDispatch();
     const [selectedCategory, setSelectedCategory] = useState<string>("All");
     const [tasks, setTasksLocal] = useState<TaskDetails[]>([]);
+    const navigate=useNavigate();
     const { data: tasksData, error, isLoading } = useGetTasksByUsernameQuery(currentUser as string)
     useEffect(() => {
         if (tasksData) {
@@ -29,6 +31,10 @@ const UserTasks: React.FC=()=> {
         }
       }, [tasksData, selectedCategory]);
 
+      const handleTaskClick=(id:number)=>{
+        navigate(`taskdetail/${id}`)
+      }
+
   return (
     <div>
        <div>
@@ -45,7 +51,7 @@ const UserTasks: React.FC=()=> {
         {
             tasks?.map((task: TaskDetails)=>{
                 return(
-                    <div key={task.id}>
+                    <div key={task.id} onClick={()=>handleTaskClick(task.id)}>
                    <UserTasksCard task={task}/>
                     </div>
                 )

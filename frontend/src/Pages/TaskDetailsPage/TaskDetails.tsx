@@ -11,3 +11,5 @@ const TaskDetails: React.FC=()=>{
         </>
     )
 }
+
+export default TaskDetails
