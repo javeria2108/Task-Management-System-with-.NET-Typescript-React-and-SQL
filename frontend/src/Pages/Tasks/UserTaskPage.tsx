@@ -32,8 +32,9 @@ const UserTasks: React.FC=()=> {
   return (
     <div>
        <div>
-          <label className="mr-2">Filter by Category:</label>
-          <select value={selectedCategory} onChange={handleCategoryChange} className="p-2 border rounded-lg">
+          <label className="p-10 m-5 text-white">Filter by Category:</label>
+          <select value={selectedCategory} onChange={handleCategoryChange} className="p-2 border rounded-lg
+          border-blue mt-5 mb-10 bg-blue text-white">
             <option value="All">All</option>
             <option value="Development">Development</option>
             <option value="Design">Design</option>
