@@ -1,15 +1,15 @@
 import { useParams } from "react-router-dom";
-import { useGetTaskByIdQuery, useUpdateTaskMutation } from "../redux/api/tasksApi";
+import { useGetTaskByIdQuery, useUpdateTaskMutation } from "../../redux/api/tasksApi";
 import { useForm } from "react-hook-form";
-import { TaskDetailsSchema } from "../Schemas/TaskSchema";
+import { TaskDetailsSchema } from "../../Schemas/TaskSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { EditableFields } from "../constants";
-import { TaskDetails } from "../redux/types/TaskState.type";
+import { EditableFields } from "../../constants";
+import { TaskDetails } from "../../redux/types/TaskState.type";
 import { format } from 'date-fns';
-import { useAppDispatch } from "../redux/hooks";
-import { editTask } from "../redux/slices/TasksSlice";
+import { useAppDispatch } from "../../redux/hooks";
+import { editTask } from "../../redux/slices/TasksSlice";
 
 const AdminTaskDetails: React.FC = () => {
   const { id } = useParams();

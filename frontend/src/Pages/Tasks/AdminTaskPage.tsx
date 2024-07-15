@@ -51,11 +51,6 @@ const AdminTaskPage: React.FC = () => {
     navigate("create"); // Navigate to create task page
   };
 
-  // Handle new task creation from CreateTaskForm
-  const handleTaskCreated = (newTask: TaskDetails) => {
-    dispatch(addTask(newTask)); // Add new task to Redux state
-    setTasksLocal(prevTasks => [...prevTasks, newTask]); // Update local state
-  };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading tasks</div>;
@@ -70,8 +65,9 @@ const AdminTaskPage: React.FC = () => {
           Create New
         </button>
         <div>
-          <label className="mr-2">Filter by Category:</label>
-          <select value={selectedCategory} onChange={handleCategoryChange} className="p-2 border rounded-lg">
+          <label className="mr-2 text-white">Filter by Category:</label>
+          <select value={selectedCategory} onChange={handleCategoryChange} className="p-2 border rounded-lg
+          border-blue mt-5 mb-10 bg-blue text-white">
             <option value="All">All</option>
             <option value="Development">Development</option>
             <option value="Design">Design</option>

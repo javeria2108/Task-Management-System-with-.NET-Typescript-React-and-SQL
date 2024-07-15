@@ -9,7 +9,7 @@ import Team from './Pages/Team';
 import Dashboard from './Pages/Dashboard';
 import { CreateTaskForm } from './Pages/CreateTask';
 import './styles.css';
-import AdminTaskDetails from './Pages/AdminTaskDetails';
+import AdminTaskDetails from './Pages/TaskDetailsPage/AdminTaskDetails';
 
 function App() {
 
