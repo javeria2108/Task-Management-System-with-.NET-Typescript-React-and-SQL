@@ -62,13 +62,13 @@ console.log(id)
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col bg-lightGrey m-5 p-6 rounded-lg
-    text-white">
+    text-lightPink">
       <h1 className="text-2xl sm:text-3xl text-white mb-6">Task Details</h1>
       <div className="grid grid-cols-2 gap-4 w-4/5">
         {/* Left Column */}
         <div className="flex flex-col gap-2">
           <div className="relative">
-            <label>Name</label>
+            <label className="text-blue">Name</label>
             <input
               {...register("name")}
               placeholder="Task Name"
@@ -78,7 +78,7 @@ console.log(id)
           </div>
 
           <div className="relative">
-            <label>Description</label>
+            <label className="text-blue">Description</label>
             <textarea
               {...register("description")}
               placeholder="Description"
@@ -90,6 +90,7 @@ console.log(id)
 
 
           <div className="relative">
+          <label className="text-blue">Priority</label>
             <input
               {...register("priority")}
               className={`p-2 border rounded-xl w-full bg-darkGrey`}
@@ -102,6 +103,7 @@ console.log(id)
         {/* Right Column */}
         <div className="flex flex-col gap-2">
           <div className="relative">
+          <label className="text-blue">Category</label>
             <input
               {...register("category")}
               className={`p-2 border rounded-xl w-full bg-darkGrey`}
@@ -111,6 +113,7 @@ console.log(id)
           </div>
 
           <div className="relative">
+          <label className="text-blue">Due date</label>
             <input
               {...register("duedate", { valueAsDate: true })}
               placeholder="Due Date"
@@ -119,6 +122,7 @@ console.log(id)
           </div>
     
           <div className="relative">
+          <label className="text-blue">user name</label>
             <input
               {...register("username")}
               placeholder="Username"
@@ -128,6 +132,7 @@ console.log(id)
           </div>
 
           <div className="relative">
+          <label className="text-blue">Completed this task? update status:</label>
             <select
               {...register("status")}
               className={`bg-darkGrey p-2 border rounded-xl w-full ${isEditable.status ? "bg-blue-100" : "bg-grey-100"}`}
