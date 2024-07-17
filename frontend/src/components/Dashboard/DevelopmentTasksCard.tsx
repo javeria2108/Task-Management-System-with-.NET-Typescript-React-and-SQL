@@ -21,9 +21,6 @@ const DevelopmentTasksCard: React.FC<{ tasks: TaskDetails[] }> = ({ tasks }) => 
         </div>
         <p className="text-right text-sm">{Math.round(progress)}% completed</p>
       </div>
-      {developmentTasks.map(task => (
-        <UserTasksCard key={task.id} task={task} />
-      ))}
     </div>
   );
 };

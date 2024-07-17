@@ -2,7 +2,7 @@ import React from 'react';
 import { TaskDetails } from '../../redux/types/TaskState.type';
 import UserTasksCard from '../../components/UserTasksCard';
 
-const DevelopmentTasksCard: React.FC<{ tasks: TaskDetails[] }> = ({ tasks }) => {
+const TestingTasksCard: React.FC<{ tasks: TaskDetails[] }> = ({ tasks }) => {
   const TestingTasks = tasks.filter(task => task.category === 'Testing');
 
   const totalTasks = TestingTasks.length;
@@ -21,11 +21,9 @@ const DevelopmentTasksCard: React.FC<{ tasks: TaskDetails[] }> = ({ tasks }) => 
         </div>
         <p className="text-right text-sm">{Math.round(progress)}% completed</p>
       </div>
-      {TestingTasks.map(task => (
-        <UserTasksCard key={task.id} task={task} />
-      ))}
+    
     </div>
   );
 };
 
-export default DevelopmentTasksCard;
+export default TestingTasksCard;

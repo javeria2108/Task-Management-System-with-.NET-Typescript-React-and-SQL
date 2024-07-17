@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch } from '../../redux/hooks';
 import { useGetAllTasksQuery } from '../../redux/api/tasksApi';
 import { TaskDetails } from '../../redux/types/TaskState.type';
 import { setTasks } from '../../redux/slices/TasksSlice';
@@ -26,13 +26,16 @@ const AdminDashboard: React.FC = () => {
   if (error) return <div>Error loading tasks</div>;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 max-w-fit">
-      <RoundChartCard tasks={tasks} />
-      <ProjectDetailsCard />
-      <CalendarCard />
-     <TodayTasksCard tasks={tasks} />
-      <DevelopmentTasksCard tasks={tasks} />
-      <TestingTasksCard tasks={tasks} /> 
+    <div className='h-screen overflow-y-auto'>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 max-w-fit">
+        <RoundChartCard tasks={tasks} />
+        <ProjectDetailsCard />
+        <CalendarCard />
+        <TodayTasksCard tasks={tasks} />
+        <DevelopmentTasksCard tasks={tasks} />
+        <TestingTasksCard tasks={tasks} /> 
+      </div>
+      <div className="mb-10"></div> {/* Empty space after the cards */}
     </div>
   );
 };
