@@ -7,8 +7,8 @@ import ProjectDetailsCard from '../../components/Dashboard/ProjectDetails';
 import RoundChartCard from '../../components/Dashboard/RoundChart';
 import CalendarCard from '../../components/Dashboard/Calendar/Calendar';
 import TodayTasksCard from '../../components/Dashboard/TodayTasks';
-// import DevelopmentTasksCard from './DevelopmentTasksCard';
-// import TestingTasksCard from './TestingTasksCard';
+import DevelopmentTasksCard from '../../components/Dashboard/DevelopmentTasksCard';
+import TestingTasksCard from '../../components/Dashboard/TestingTasksCard';
 
 const AdminDashboard: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -31,8 +31,8 @@ const AdminDashboard: React.FC = () => {
       <ProjectDetailsCard />
       <CalendarCard />
      <TodayTasksCard tasks={tasks} />
-       {/*<DevelopmentTasksCard tasks={tasks} />
-      <TestingTasksCard tasks={tasks} /> */}
+      <DevelopmentTasksCard tasks={tasks} />
+      <TestingTasksCard tasks={tasks} /> 
     </div>
   );
 };

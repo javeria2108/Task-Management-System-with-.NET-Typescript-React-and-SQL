@@ -11,7 +11,7 @@ const TodayTasksCard: React.FC<{ tasks: TaskDetails[] }> = ({ tasks }) => {
   });
 
   return (
-    <div className="bg-darkGrey p-4 rounded-lg shadow text-white">
+    <div className="bg-darkGrey p-4 rounded-lg shadow text-white max-w-72">
       <h2 className="text-lg font-bold mb-2">Today's Tasks</h2>
       {todayTasks.length > 0 ? (
         todayTasks.map(task => (
