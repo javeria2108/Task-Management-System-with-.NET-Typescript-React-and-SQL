@@ -41,7 +41,7 @@ export function Login() {
   console.log(user)
   return (
     <form onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col m-auto mt-5 sm:mt-14 p-5 h-2/3 w-3/5 sm:w-2/5 bg-black rounded-xl items-center">
+      className="flex flex-col m-auto mt-5 sm:mt-14 p-5 h-2/3 w-3/5 sm:w-2/5 bg-MediumGrey rounded-xl items-center">
       <h1 className="text-center text-2xl sm:text-3xl text-white">Login</h1>
       
       <input {...register('username')}

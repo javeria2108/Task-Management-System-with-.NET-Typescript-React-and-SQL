@@ -14,9 +14,11 @@ import { editTask } from "../../redux/slices/TasksSlice";
 const AdminTaskDetails: React.FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { data: taskData, error, isLoading } = useGetTaskByIdQuery(parseInt(id as string));
+  const { data: taskData} = useGetTaskByIdQuery(parseInt(id as string));
   const [task, setTask] = useState<TaskDetails>();
-
+  const [msg, setMsg]=useState("")
+  const [error, setError]=useState("")
+console.log(id)
   const [updateTask] = useUpdateTaskMutation();
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<TaskDetails>({
     resolver: zodResolver(TaskDetailsSchema)
@@ -47,8 +49,8 @@ const AdminTaskDetails: React.FC = () => {
 
   const onSubmit = async (data: TaskDetails) => {
     try {
-      console.log(data); // Debug log
-      const updatedTask = await updateTask({ ...data, id: task!.id }).unwrap();
+      const taskId=parseInt(id as string)
+      const updatedTask = await updateTask({ ...data, id:taskId }).unwrap();
       setTask(updatedTask); // Update local task state
       dispatch(editTask(updatedTask)); // Dispatch Redux action if necessary
       console.log("Task updated successfully");
@@ -61,8 +63,6 @@ const AdminTaskDetails: React.FC = () => {
     setIsEditable((prev) => ({ ...prev, [field]: !prev[field] }));
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading task</div>;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col bg-lightGrey m-5 p-6 rounded-lg">
@@ -96,13 +96,12 @@ const AdminTaskDetails: React.FC = () => {
             <select
               {...register("priority")}
               className={`p-2 border rounded-xl w-full ${isEditable.priority ? "bg-blue-100" : "bg-grey-100"}`}
-              disabled={!isEditable.priority}
+            
             >
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
               <option value="High">High</option>
             </select>
-            <FontAwesomeIcon icon="edit" className="absolute top-2 right-2 cursor-pointer" onClick={() => handleEditClick("priority")} />
           </div>
           <span className="text-red-500">{errors.priority?.message}</span>
         </div>
@@ -113,14 +112,13 @@ const AdminTaskDetails: React.FC = () => {
             <select
               {...register("category")}
               className={`p-2 border rounded-xl w-full ${isEditable.category ? "bg-blue-100" : "bg-grey-100"}`}
-              disabled={!isEditable.category}
+             
             >
               <option value="Development">Development</option>
               <option value="Design">Design</option>
               <option value="Testing">Testing</option>
               <option value="Management">Management</option>
             </select>
-            <FontAwesomeIcon icon="edit" className="absolute top-2 right-2 cursor-pointer" onClick={() => handleEditClick("category")} />
           </div>
           <span className="text-red-500">{errors.category?.message}</span>
 
@@ -146,13 +144,15 @@ const AdminTaskDetails: React.FC = () => {
           <span className="text-red-500">{errors.username?.message}</span>
 
           <div className="relative">
-            <input
+            <select
               {...register("status")}
-              placeholder="Status"
               className={`p-2 border rounded-xl w-full ${isEditable.status ? "bg-blue-100" : "bg-grey-100"}`}
-              readOnly={!isEditable.status}
-            />
-            <FontAwesomeIcon icon="edit" className="absolute top-2 right-2 cursor-pointer" onClick={() => handleEditClick("status")} />
+         
+            >
+              <option value="Pending">pending</option>
+              <option value="In Progress">in progress</option>
+              <option value="Completed">completed</option>
+            </select>
           </div>
           <span className="text-red-500">{errors.status?.message}</span>
         </div>
