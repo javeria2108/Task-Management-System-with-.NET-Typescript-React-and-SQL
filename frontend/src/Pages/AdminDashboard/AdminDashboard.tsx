@@ -6,7 +6,7 @@ import { setTasks } from '../../redux/slices/TasksSlice';
 import ProjectDetailsCard from '../../components/Dashboard/ProjectDetails';
 import RoundChartCard from '../../components/Dashboard/RoundChart';
 import CalendarCard from '../../components/Dashboard/Calendar/Calendar';
-// import TodayTasksCard from './TodayTasksCard';
+import TodayTasksCard from '../../components/Dashboard/TodayTasks';
 // import DevelopmentTasksCard from './DevelopmentTasksCard';
 // import TestingTasksCard from './TestingTasksCard';
 
@@ -30,8 +30,8 @@ const AdminDashboard: React.FC = () => {
       <RoundChartCard tasks={tasks} />
       <ProjectDetailsCard />
       <CalendarCard />
-     {/* <TodayTasksCard tasks={tasks} />
-      <DevelopmentTasksCard tasks={tasks} />
+     <TodayTasksCard tasks={tasks} />
+       {/*<DevelopmentTasksCard tasks={tasks} />
       <TestingTasksCard tasks={tasks} /> */}
     </div>
   );
