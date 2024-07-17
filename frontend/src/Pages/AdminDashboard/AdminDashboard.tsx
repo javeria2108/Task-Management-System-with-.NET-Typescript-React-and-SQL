@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useGetAllTasksQuery } from '../../redux/api/tasksApi';
 import { TaskDetails } from '../../redux/types/TaskState.type';
 import { setTasks } from '../../redux/slices/TasksSlice';
-// import ProjectDetailsCard from './ProjectDetailsCard';
+import ProjectDetailsCard from '../../components/Dashboard/ProjectDetails';
  import RoundChartCard from '../../components/Dashboard/RoundChart';
 // import CalendarCard from './CalendarCard';
 // import TodayTasksCard from './TodayTasksCard';
@@ -28,8 +28,8 @@ const AdminDashboard: React.FC = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
       <RoundChartCard tasks={tasks} />
-      {/* <ProjectDetailsCard />
-      <CalendarCard />
+      <ProjectDetailsCard />
+      {/*<CalendarCard />
       <TodayTasksCard tasks={tasks} />
       <DevelopmentTasksCard tasks={tasks} />
       <TestingTasksCard tasks={tasks} /> */}
