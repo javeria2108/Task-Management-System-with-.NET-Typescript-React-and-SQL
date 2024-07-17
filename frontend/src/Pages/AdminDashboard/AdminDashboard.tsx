@@ -35,7 +35,7 @@ const AdminDashboard: React.FC = () => {
         <DevelopmentTasksCard tasks={tasks} />
         <TestingTasksCard tasks={tasks} /> 
       </div>
-      <div className="mb-10"></div> {/* Empty space after the cards */}
+      <div className="mb-24"></div> {/* Increase margin to 4rem (16) for more space */}
     </div>
   );
 };
