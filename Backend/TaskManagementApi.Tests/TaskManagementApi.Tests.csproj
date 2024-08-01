@@ -19,11 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
+    <ProjectReference Include="..\TaskManagement.Api\TaskManagement.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ControllerTests\" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>
